@@ -4,7 +4,7 @@ import numpy as np
 class Config:
     def __init__(self):
         self.path_archivoEntrenado = "haarcascade_frontalface_default.xml"  # Archivo clasificador
-        self.path_imagenVerificar = "persons.png"
+        self.path_imagenVerificar = "personas.jpg"
 
 faceClassif = cv2.CascadeClassifier(Config().path_archivoEntrenado)
 #Obtiene imagen
