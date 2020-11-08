@@ -1,4 +1,4 @@
-![logo](https://imgur.com/Xv8Bb2L.png)
+
 
 # NOTE: [No terminado, está en desarrollo]
 # __¡ IMPORTANT NOTE !:__ Ésta herramienta tiene como único proposito general, el aprendizaje de ___"Seguridad en sistemas informáticos"___, el creador no se hace responsable por un posible mal uso de ésta herramienta. 
