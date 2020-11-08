@@ -14,12 +14,12 @@ VSVersionInfo(
       [
       StringTable(
         u'040904B0',
-        [StringStruct(u'CompanyName', u'SEPH Soft'),
-        StringStruct(u'FileDescription', u'Software Antiplagio para examenes'),
+        [StringStruct(u'CompanyName', u'SDTech Soft'),
+        StringStruct(u'FileDescription', u'Software vigilante para examenes'),
         StringStruct(u'FileVersion', u'6.1.7601.17514 (win7sp1_rtm.101119-1850)'),
-        StringStruct(u'InternalName', u'Administra y delega recursos'),
+        StringStruct(u'InternalName', u'Watching You Software'),
         StringStruct(u'LegalCopyright', u'\xa9 Microsoft Corporation. All rights reserved.'),
-        StringStruct(u'OriginalFilename', u'Antiplagiarism.exe'),
+        StringStruct(u'OriginalFilename', u'WatchingYou.exe'),
         StringStruct(u'ProductName', u'Microsoft\xae Windows\xae Operating System'),
         StringStruct(u'ProductVersion', u'6.1.7601.17514')])
       ]), 

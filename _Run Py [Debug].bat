@@ -1,6 +1,6 @@
 echo off
 title Run mode DEBUG
 color 0a
-python Antiplagiarism.py
+python main.py
 :cmd
 pause null 

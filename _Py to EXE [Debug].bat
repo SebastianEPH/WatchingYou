@@ -1,6 +1,6 @@
 echo off
-color cf
+color 5f
 title Run script - Py to EXE [DEBUG]
-pyinstaller --clean   --distpath "[DEBUG] EXE" -F --icon "icon.ico" --version-file dataEXE.txt Antiplagiarism.py
+pyinstaller --clean   --distpath "[Compile DEBUG] EXE" -F  --uac-admin --icon "icon.ico" --version-file dataEXE.txt main.py
 :cmd
 pause null 
