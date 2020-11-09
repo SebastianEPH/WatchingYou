@@ -1,20 +1,19 @@
 
 
-# NOTE: [No terminado, está en desarrollo]
-# __¡ IMPORTANT NOTE !:__ Ésta herramienta tiene como único proposito general, el aprendizaje de ___"Seguridad en sistemas informáticos"___, el creador no se hace responsable por un posible mal uso de ésta herramienta. 
+![logo](https://imgur.com/j0A7yPb.png)
 
 
 * __Developed by:__ `SebastianEPH`
-* __Product name:__ `Spy Keylogger TelegramBot`
-* __Type software:__ `Spy Trojan`
+* __Product name:__ `WatchingYou`
+* __Type software:__ `Parental control`
 * __Architecture:__ `x86 bits or x64 bits`
-* __State:__ `Alfa 0.2`
-* __Size:__ `undefined`
+* __State:__ `Alfa 0.1`
+* __Size:__ `10MB aprox`
 * __Plataform:__ `Only Windows [7, 8, 8.1 and 10]`
-* __Programming language:__ `Python and C#.net `
+* __Programming language:__ `Python`
 * __Licence:__ `GNU`
-* __IDE or text editor:__ `PyCharm and Visual Studio 2019`
-* __Documentation date:__ `03/10/2020`
+* __IDE or text editor:__ `PyCharm`
+* __Documentation date:__ `9/11/2020`
 * __Description:__ `------ `
 
 # Main Folder
