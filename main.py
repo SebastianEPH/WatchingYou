@@ -547,6 +547,7 @@ class PCInformation:
 class WebCam_IA:
     def __init__(self):
         self.frontalFace_path = "haarcascade_frontalface_default.xml"  # Archivo clasificador
+        self.eyes_path = "haarcascade_eye.xml"  # Archivo clasificador
         self.path_imagenVerificar = "personas.jpg"
 
     def get_capture_webcam(self):
@@ -561,36 +562,61 @@ class WebCam_IA:
                 pass
             print('No se puedo obtener ambas camaras')
             return False
-    def trained_file(self):
+
+    def trained_file_face(self):
         try:
             return cv2.CascadeClassifier(self.frontalFace_path)
         except:
             return False
-    
-    def start(self):
-        cap = self.get_capture_webcam()
-        faceClassif = self.trained_file()
 
+    def trained_file_eyes(self):
+        try:
+            return cv2.CascadeClassifier(self.eyes_path)
+        except:
+            return False
+
+    def save_video(self):
+        pass
+
+    def upload_video(self):
+        pass
+
+    def start(self):
+        cap = cv2.VideoCapture(0) #self.get_capture_webcam()
+        faceClassif = self.trained_file_face()
+        eyesClassif = self.trained_file_eyes()
+        outVideo = cv2.VideoWriter('videoGrabado.avi', cv2.VideoWriter_fourcc(*'XVID'), 20, (640, 480))
         if cap != False and faceClassif != False:
-            while True:
-                ret, frame = cap.read()  # Obtiene frames
+            while cap.isOpened():
+                ret, frame = cap.read()  # Obtiene frames // ret == true si hay video
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
                 faces = faceClassif.detectMultiScale(gray,
                                                      scaleFactor=1.05,  # original 1.3,  # Reducción de imagen
-                                                     minNeighbors=5
-                                                     # Espeficica el número mínimo de cuadros delimitadores
-                                                     )
-                for x, y, w, h in faces:
-                    cv2.rectangle(frame,
-                                  (x, y),
-                                  (x + w, y + h),
-                                  (0, 255, 0),
-                                  5)  # original 2
-                cv2.imshow('frame', frame)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                                                     minNeighbors=5) #5    # Espeficica el número mínimo de cuadros delimitadores
+                eyes = eyesClassif.detectMultiScale(gray,
+                                                    scaleFactor=1.05,
+                                                    minNeighbors=5)
+                if ret == True:
+                    for x, y, w, h in faces:
+                        cv2.rectangle(frame,
+                                      (x, y),
+                                      (x + w, y + h),
+                                      (0, 0, 255),
+                                      2)  # original 2
+                    for x, y, w, h in eyes:
+                        cv2.rectangle(frame,
+                                      (x, y),
+                                      (x + w, y + h),
+                                      (0, 255, 0),
+                                      2)  # original 2
+
+                    cv2.imshow('WebCam IA detecction', frame)
+                    outVideo.write(frame)
+                    if cv2.waitKey(1) & 0xFF == ord('q'):
+                        break
             cap.release()
+            outVideo.release()
             cv2.destroyAllWindows()
         else:
             print('No se puedo acceder a la webcam o al archivo entrenado')
