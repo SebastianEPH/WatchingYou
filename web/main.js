@@ -19,8 +19,9 @@ function stopped(){
 	})
 }
 function __exit(){
-	eel.exit___(()=>{
-
+	eel.exit___()(()=>{
+		window.close();
+		return false
 	})
 }
 
