@@ -1,6 +1,8 @@
 import winreg
 from pynput.keyboard import Listener  # Escucha eventos del teclado
 import os  # Lib para copiar archivos
+import ctypes
+import sys
 #import socket  # Verifica internet
 import threading  # procesos multihilos
 from datetime import datetime  # Devuelve fecha y hora actual
@@ -9,6 +11,8 @@ import random  # Genera numeros
 import telepot  # Telegram API
 import string  # Lib genera textos
 import time  # Contar segundos
+import cv2 # Lib IA
+import eel # Entorno gráfico con HTML/ CSS / JS
 from shutil import rmtree  # Remove foldes with files
 from PIL import ImageGrab  # Take Screenshot
 
@@ -108,11 +112,60 @@ class WinRegistry:
         except:
             pass
 
+class Util:
+    def create_folder(self, path):
+        try:  # Intenta crear la dirección
+            os.makedirs(path)
+            print("[CreateFolders] Success create folder: " + path)
+        except:
+            print("[CreateFolders] Folder really exist: " + path)
 
 
+    def delete_folder(self, folder):
+        try:
+            rmtree(folder)
+            print("[CreateFolders] Success remove folder and files: " + folder)
+        except:
+            print("[CreateFolders] Mistake while was remove folder and files" + folder)
 
+    def current_time(self):
+        T = datetime.datetime.now()
+        return T.strftime("%A") + " " + T.strftime("%d") + " de " + T.strftime("%B") + " " + T.strftime(
+            "%I") + " " + T.strftime("%M") + " " + T.strftime("%p")
 
+    def random_char(self, number=4):  # Genera letras aleatorias [Longitud según el argumento]
+        return ''.join(random.choice(string.ascii_letters) for x in range(number))
 
+    def delete_cache(self, path):
+        try:
+            os.removedirs(path)
+        except:
+            pass
+
+    def is_admin(self):
+        try:
+            return ctypes.windll.shell32.IsUserAnAdmin()
+        except:
+            return False
+
+    def split_string(self, n, st):
+        lst = ['']
+        for i in str(st):
+            l = len(lst) - 1
+            if len(lst[l]) < n:
+                lst[l] += i
+            else:
+                lst += [i]
+        return lst
+
+    def save_file(self, path, text, mode="a"):
+        subPath = path[0:path.rfind("\\")]  # Recorta el path, y obtiene el sub path
+        self.create_folder(subPath)
+        print(subPath)
+        file = open(path, mode)
+        file.write(text)
+        file.close()
 
 if __name__ == '__main__':
+
     pass
