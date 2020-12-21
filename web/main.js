@@ -1,12 +1,28 @@
 function sendData() {
-	var nickname = document.getElementById("username").value
+	var fullname = document.getElementById("username").value
 	var tele_id = document.getElementById("tele_id").value
-	console.log("init")
-	eel.send_values(nickname, tele_id)//(setImage)
+	eel.check_id(tele_id, fullname)((pass_id)=>{
+		if (pass_id){
+			console.log('El ID es aceptado')
+			eel.start_software()//(setImage)
+			window.location.href = "on-line.html"
+		}else{
+			console.log('El ID fue rechazado ')
+			window.location.href = "index_fail.html"
 
-	console.log('funcion')
-	window.location.href = "on-line.html"
+		}
+	})
+
+
+
+	console.log("init")
+
+
+	console.log('pasando.... ')
+	//window.location.href = "on-line.html"
 	//eel.get_id_telegram(tele_id)
+
+
 }
 function retry(){
     eel.stop___()(()=>{
