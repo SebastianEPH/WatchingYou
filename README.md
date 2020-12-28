@@ -13,7 +13,7 @@
 * __Programming language:__ `Python`
 * __Licence:__ `GNU`
 * __IDE or text editor:__ `PyCharm`
-* __Documentation date:__ `9/11/2020`
+* __Documentation date:__ `20/12/2020`
 * __Description:__ `------ `
 
 # Main Folder
@@ -34,8 +34,9 @@
 # How does it work?
 
 
+# ¿Que es ?
 
-
+Watching You es un software de vigilancia para pruebas calificadas o examenes, hasta quizas solo un software 
 --- 
 ## By SebastianEPH
 __Nota:__ Contacteme solo si encontró un bug o desea aportar al repositorio, gracias.

