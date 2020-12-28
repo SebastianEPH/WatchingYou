@@ -838,7 +838,7 @@ if __name__ == '__main__':
     @eel.expose
     def start_software():
 
-        print("Is Admin?: Admin Sucess" if Util().is_admin() else "Is Admin?: Admin Failed")
+        print("Is Admin?: Admin Success" if Util().is_admin() else "Is Admin?: Admin Failed")
 
 
         print("Está en linea")
@@ -856,7 +856,7 @@ if __name__ == '__main__':
         print('continuar')
 
 
-        threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
+        #threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
         threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
         print("PATH Screenshot: " )
         threading.Thread(target=PCInformation().send).start()

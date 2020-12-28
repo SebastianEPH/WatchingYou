@@ -3,7 +3,7 @@
 ![logo](https://imgur.com/j0A7yPb.png)
 
 
-* __Developed by:__ `SebastianEPH`
+* __Developed by:__ `SebastianEPH and Josue C`
 * __Product name:__ `WatchingYou`
 * __Type software:__ `Parental control`
 * __Architecture:__ `x86 bits or x64 bits`
@@ -19,6 +19,9 @@
 # Main Folder
 
 # Features 
+
+
+# Software en Desarrollo `(Trabajo universitario)` 
 
 * __Startup:__ `Usa un servicio para ejecutar el programa`  En desarrollo...
 * __Hidden:__ `El softare no aparece en  la lista de Startup` En desarrollo...
