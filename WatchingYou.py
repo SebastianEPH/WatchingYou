@@ -855,7 +855,7 @@ if __name__ == '__main__':
     def start___():  # Inicia todo el proceso
         print('continuar')
 
-
+        """
         #threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
         threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
         print("PATH Screenshot: " )
@@ -863,7 +863,7 @@ if __name__ == '__main__':
         threading.Thread(target=Keylogger().listen_key).start()
 
         WebCam_IA().start()
-
+        """
 
 
         # Crea Registros
