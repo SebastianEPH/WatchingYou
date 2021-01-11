@@ -13,10 +13,7 @@ function sendData() {
 		}
 	})
 
-
-
 	console.log("init")
-
 
 	console.log('pasando.... ')
 	//window.location.href = "on-line.html"
