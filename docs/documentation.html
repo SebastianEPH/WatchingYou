@@ -46,12 +46,11 @@
 <div class="container">
 
     <div class="row">
-
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block  bg-light sidebar collapse" style="display: block;">
                <div class="position-sticky pt-3">
                    <ul class="nav flex-column">
                        <li class="nav-item">
-                           <a class="nav-link active" aria-current="page"  onclick="clic_button()">
+                           <a class="nav-link active" aria-current="page"  onclick="fichaTecnica()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                                Ficha Técnica
                            </a>
@@ -63,7 +62,7 @@
                            </a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" href="#">
+                           <a class="nav-link" onclick="manualUser()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -72,12 +71,22 @@
                            </a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" href="#">
+                           <a class="nav-link" onclick="manualDocente()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
                                </svg>
                                Manual de Docente
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journal-code" viewBox="0 0 16 16">
+                                   <path fill-rule="evenodd" d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"/>
+                                   <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                   <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                               </svg>
+                               Documentación de Código
                            </a>
                        </li>
                        <li class="nav-item">
@@ -104,18 +113,6 @@
                        <li class="nav-item">
                            <a class="nav-link" href="#">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                               Last quarter
-                           </a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="#">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                               Social engagement
-                           </a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="#">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                                Year-end sale
                            </a>
                        </li>
@@ -126,6 +123,10 @@
         <div class="col-9 ">
             <div id="main" class="row p-3">
                 <h1>Bienvenido a la documentación </h1>
+                <div class="p-3">
+                    menu
+                </div>
+
             </div>
             <div id="ficha_tecnica" class="row p-3">
                 <h1>Ficha técnica</h1>
@@ -187,7 +188,7 @@
                     </ul>
                 </div>
 
-                <h2>Librerías utilizadas</h2>
+                <h2>Lenguajes</h2>
                 <div class="p-3">
                     <ul>
                         <li><b>Python: </b></li>
@@ -223,31 +224,72 @@
                                 <li><b><a href="https://getbootstrap.com/">Bootstrap: </a></b> <code>Interfaces web</code></li>
                             </ul>
                         </ul>
-
+                    </ul>
+                </div>
+                <h2>Paradigmas de programación: </h2>
+                <div class="p-3">
+                    <ul>
+                        <li><b>Programación funcional: </b> <code>(Intermedio)</code></li>
+                        <li><b>Programación orientada a objetos : </b> <code>(Intermedio)</code></li>
+                        <li><b>Programación dirigida a eventos: </b> <code>(Intermedio)</code></li>
+                    </ul>
+                </div>
+                <h2>Softwares: </h2>
+                <div class="p-3">
+                    <ul>
+                        <li><b><a href="https://www.jetbrains.com/es-es/pycharm/">IDE Pycharm </a></b></li>
+                        <li><b><a href="https://code.visualstudio.com/">Visual Code</a></b></li>
+                    </ul>
+                </div>
+                <h2>Servicios Web : </h2>
+                <div class="p-3">
+                    <ul>
+                        <li><b><a href="https://github.com/">GitHub</a></b></li>
+                        <li><b><a href="https://core.telegram.org/">Telegram API REST</a></b></li>
+                        <li><b><a href="https://asana.com/es">Asana</a></b></li>
                     </ul>
                 </div>
 
 
+
             </div>
             <div id="manual_user" class="row p-3">
-                hola
+                <h1>Manual de Usuario</h1>
+                <div class="p-3" style="text-align: center">
+                    <h3>Pantalla de inicio</h3>
+                    <p>
+                        El estudiante debe ingresar su nombre completo y el CHAT ID proporcionado por el docente
+                    </p>
+                    <img class="" src="https://imgur.com/shu63Zg.png"
+                         alt="software - inicio" >
+                    <div class="p-4"></div>
+                    <h3>Pantalla con datos</h3>
+                    <p>La ventana con datos debe verse así.</p>
+                    <img class="" src="https://imgur.com/TiXlm1g.png"
+                         alt="software - inicio" >
+                    <div class="p-4"></div>
+                    <h3>Pantalla de error de id</h3>
+                    <p>Si por alguna razón el ChatID es incorrecto, mandará un error para volver a intentarlo</p>
+                    <img class="" src="https://imgur.com/4wfbmMj.png"
+                         alt="software - inicio" >
+                    <div class="p-4"></div>
+                    <h3>Pantalla id correcto</h3>
+                    <p>Si los datos ingresados son correctos el software se iniciará cnormalmente</p>
+                    <p>Todos los servicios de monitoreo se activan, para detener el servicio debes darle al botón <code>Detener</code> lo cual detendrá todos los servicios y notificará al docente que detuvo el servicio</p>
+                    <img class="" src="https://imgur.com/4AHR4he.png"
+                         alt="software - inicio" >
+                </div>
             </div>
             <div id="manual_docente" class="row p-3">
-                hola
+                <h2>Manual Docente</h2>
             </div>
-
         </div>
-
     </div>
 
 </div>
 
 </body>
-<script>
-    function clic_button(){
-        console.log('el usuario oprimio el botón')
-    }
-</script>
+<script src="script/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
 </html>
