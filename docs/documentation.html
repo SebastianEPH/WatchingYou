@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Documentación WatchingYou</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"  style="display: block;" aria-label="Ninth navbar example">
+    <div class="container-xl">
+        <a class="navbar-brand" href="#">Documentación</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample07XL">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown07XL">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form>
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="row">
+
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block  bg-light sidebar collapse" style="display: block;">
+               <div class="position-sticky pt-3">
+                   <ul class="nav flex-column">
+                       <li class="nav-item">
+                           <a class="nav-link active" aria-current="page"  onclick="clic_button()">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                               Ficha Técnica
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                               Manual de empaquetado
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                               </svg>
+                               Manual de Usuario
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                   <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                               </svg>
+                               Manual de Docente
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                               Acerca de nosotros
+                           </a>
+                       </li>
+                   </ul>
+
+                   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                       <span>Saved reports</span>
+                       <a class="link-secondary" href="#" aria-label="Add a new report">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                       </a>
+                   </h6>
+                   <ul class="nav flex-column mb-2">
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                               Current month
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                               Last quarter
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                               Social engagement
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                               Year-end sale
+                           </a>
+                       </li>
+                   </ul>
+               </div>
+           </nav>
+
+        <div class="col-9 ">
+            <div id="ddcsf" class="row p-3">
+                <h1>Bienvenido a la documentación </h1>
+            </div>
+            <div id="ddsf" class="row p-3">
+                <h1>Ficha técnica</h1>
+                <div class="p-3">
+                    <ul>
+                        <li><b>Desarrollado por: </b> <code>SebastiánEPH y Josue Chuqui</code></li>
+                        <li><b>Nombre del producto: </b> <code>WatchingYou</code></li>
+                        <li><b>Tipo de Software: </b> <code>Supervisor</code></li>
+                        <li><b>Versión: </b> <code>Beta 0.8</code></li>
+                        <li><b>Estado: </b> <code>Fase Beta</code></li>
+                        <li><b>Arquitectura: </b> <code>x86 bits || x64 bits</code></li>
+                        <li><b>Tamaño: </b> <code>3MB</code></li>
+                        <li><b>Plataforma: </b> <code>Windows 7, 8.1, 10</code></li>
+                        <li><b>Lenguajes utilizados: </b> <code>Python 3.8</code></li>
+                        <li><b>Licencia: </b> <code>GNU</code></li>
+                        <li><b>IDE: </b> <code>PyCharm</code></li>
+                        <li><b>Fecha de Documentación: </b> <code>24/01/2021</code></li>
+                        <li><b>Descripción: </b> <code>descripción básica</code></li>
+
+
+
+
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+            <div id="sdfsfd" class="row p-3">
+                hola
+            </div>
+            <div id="sdfdsd" class="row p-3">
+                hola
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script>
+    function clic_button(){
+        console.log('el usuario oprimio el botón')
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</html>
