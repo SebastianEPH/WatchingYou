@@ -50,7 +50,7 @@
                <div class="position-sticky pt-3">
                    <ul class="nav flex-column">
                        <li class="nav-item">
-                           <a class="nav-link active" aria-current="page"  onclick="fichaTecnica()">
+                           <a class="nav-link active" href="#" aria-current="page"  onclick="fichaTecnica()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                                Ficha Técnica
                            </a>
@@ -58,11 +58,11 @@
                        <li class="nav-item">
                            <a class="nav-link" href="#">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                               Manual de empaquetado
+                               Crear Ejecutable
                            </a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" onclick="manualUser()">
+                           <a class="nav-link" href="#" onclick="manualUser()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -71,7 +71,7 @@
                            </a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" onclick="manualDocente()">
+                           <a class="nav-link" href="#" onclick="manualDocente()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
@@ -80,16 +80,16 @@
                            </a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" href="#">
+                           <a class="nav-link" href="#" onclick="code_documentation()">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journal-code" viewBox="0 0 16 16">
                                    <path fill-rule="evenodd" d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"/>
                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                                </svg>
-                               Documentación de Código
+                               Descripción de métodos y clases
                            </a>
                        </li>
-                       <li class="nav-item">
+                       <li class="nav-item" onclick="about()">
                            <a class="nav-link" href="#">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                Acerca de nosotros
@@ -253,6 +253,13 @@
 
 
             </div>
+            <div id="empaquetado" class="row p-3">
+                <h1>Manual de compilación</h1>
+                <div class="p-3">
+                    manual de compilación
+                </div>
+
+            </div>
             <div id="manual_user" class="row p-3">
                 <h1>Manual de Usuario</h1>
                 <div class="p-3" style="text-align: center">
@@ -320,12 +327,315 @@
                         <div style="text-align: center" class="m-4">
                             <img height="450" src="https://imgur.com/wPP1eGj.png">
                         </div>
+                        <div style="text-align: center" class="m-4">
+                            <img height="450" src="https://imgur.com/2LO9eQ4.png">
+                        </div>
 
 
 
 
 
                     </ol>
+                </div>
+
+            </div>
+            <div id="code_documentation" class="row p-3">
+                <h1>Descripción de métodos y clases</h1>
+               <ul>
+                   <li>
+                       <h4>Clase que permite Leer, guardar, eliminar y actualizar el registro de Windows</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">WinRegistry</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__format_after_path</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__create_value</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #24909d">type</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">create_key</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">keyName):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">delete_key</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">keyName):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">read_value</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">set_value_String</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">set_value_Binary</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">set_value_DWORD</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">set_value_QWORD</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">set_value_MultiString</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">set_value_ExpandableString</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">delete_value</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">nameValue):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Contiene pequeñas funcionalidades útiles</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Util</span><span style="color: #d0d0d0">:</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">create_folder</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">path):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">delete_folder</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">folder):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">current_time</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">random_char</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">number=</span><span style="color: #3677a9">4</span><span style="color: #d0d0d0">):</span>  <span style="color: #999999; font-style: italic"># Genera letras aleatorias [Longitud según el argumento]</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">delete_cache</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">path):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">is_admin</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">split_string</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">n,</span> <span style="color: #d0d0d0">st):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">save_file</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">path,</span> <span style="color: #d0d0d0">text,</span> <span style="color: #d0d0d0">mode=</span><span style="color: #ed9d13">&quot;a&quot;</span><span style="color: #d0d0d0">):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Clase Keylogger y métodos</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Keylogger</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">_send</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">reg_text):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">listen_key</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">_key_min</span><span style="color: #d0d0d0">(numberKey):</span>  <span style="color: #999999; font-style: italic"># Caracteres Comunes // Optimizados</span>
+
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">_key_max</span><span style="color: #d0d0d0">(numberKey):</span>  <span style="color: #999999; font-style: italic"># Botones, comunes // Optimizados</span>
+
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">press</span><span style="color: #d0d0d0">(key):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Toma capturas de pantalla y lo envia</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Screenshot</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">_delete</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">name):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">send</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Bloquea y desbloquea paginas web </h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">WebsiteBlock</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__read_file</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">path):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__write_file</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">text,</span> <span style="color: #d0d0d0">split=</span><span style="color: #6ab825; font-weight: bold">True</span><span style="color: #d0d0d0">,</span> <span style="color: #24909d">type</span><span style="color: #d0d0d0">=</span><span style="color: #ed9d13">&quot;a&quot;</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__rewrite_file</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">text):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__delete_file</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">path):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">block</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">unlock</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">reset</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Obtiene información de la computadora</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">PCInformation</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #ffa500">@staticmethod</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__CMD_command</span><span style="color: #d0d0d0">(title,</span> <span style="color: #d0d0d0">command):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__display_dns</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__ip_config</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__system_info</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__driver_info</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__taks_list</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__service_active</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__red_info</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">internalIP</span><span style="color: #d0d0d0">():</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">send</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Graba la WebCam, detecta rostro y ojos</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">WebCam_IA</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__get_capture_webcam</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__trained_file_face</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__trained_file_eyes</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">upload_video</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">name):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">start</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Metodos propios del funcionamiento del software</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">WatchingYou</span><span style="color: #d0d0d0">:</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_reg_init</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">check_id</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">fullname,</span> <span style="color: #d0d0d0">chat_id):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__check_reg</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__write_id</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">fullname,</span> <span style="color: #d0d0d0">chat_id):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_reg_complete_init</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_keylogger_reg</span><span style="color: #d0d0d0">():</span>
+            <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_screenshot_reg</span><span style="color: #d0d0d0">():</span>
+            <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_telegram_bot_reg</span><span style="color: #d0d0d0">():</span>
+            <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_info_reg</span><span style="color: #d0d0d0">():</span>
+
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">write_website_reg</span><span style="color: #d0d0d0">():</span>
+
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">webcam_info_reg</span><span style="color: #d0d0d0">():</span>
+
+        <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">webcam_pc_information_reg</span><span style="color: #d0d0d0">():</span>
+
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__active_or_disable</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">value):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">active</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">disabled</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>
+</pre></div>
+                       <br>
+                   </li>
+                   <li>
+                       <h4>Código de inicializacion</h4>
+                       <div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">__name__</span> <span style="color: #d0d0d0">==</span> <span style="color: #ed9d13">&#39;__main__&#39;</span><span style="color: #d0d0d0">:</span>
+
+    <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #6ab825; font-weight: bold">not</span> <span style="color: #d0d0d0">WinRegistry(</span><span style="color: #ed9d13">r&#39;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide&#39;</span><span style="color: #d0d0d0">).read_value(</span><span style="color: #ed9d13">&#39;fullname&#39;</span><span style="color: #d0d0d0">):</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&#39;no existe, crear datos en el registro&#39;</span><span style="color: #d0d0d0">)</span>
+        <span style="color: #d0d0d0">WatchingYou().write_reg_complete_init()</span>
+
+    <span style="color: #6ab825; font-weight: bold">else</span><span style="color: #d0d0d0">:</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&#39;si se encontró el username &#39;</span><span style="color: #d0d0d0">)</span>
+
+    <span style="color: #d0d0d0">folders</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">[</span>
+        <span style="color: #24909d">str</span><span style="color: #d0d0d0">(WinRegistry(</span><span style="color: #ed9d13">r&#39;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide&#39;</span><span style="color: #d0d0d0">).read_value(</span><span style="color: #ed9d13">&#39;sub_path&#39;</span><span style="color: #d0d0d0">)),</span>
+        <span style="color: #24909d">str</span><span style="color: #d0d0d0">(WinRegistry(</span><span style="color: #ed9d13">r&#39;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\Screenshot&#39;</span><span style="color: #d0d0d0">).read_value(</span><span style="color: #ed9d13">&#39;path&#39;</span><span style="color: #d0d0d0">)),</span>
+        <span style="color: #24909d">str</span><span style="color: #d0d0d0">(WinRegistry(</span><span style="color: #ed9d13">r&#39;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\WebCam&#39;</span><span style="color: #d0d0d0">).read_value(</span><span style="color: #ed9d13">&#39;path&#39;</span><span style="color: #d0d0d0">)),</span>
+        <span style="color: #24909d">str</span><span style="color: #d0d0d0">(WinRegistry(</span><span style="color: #ed9d13">r&#39;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Hide\PCInformation&#39;</span><span style="color: #d0d0d0">).read_value(</span><span style="color: #ed9d13">&#39;path&#39;</span><span style="color: #d0d0d0">)),</span>
+    <span style="color: #d0d0d0">]</span>
+    <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">f</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #d0d0d0">folders:</span>
+        <span style="color: #d0d0d0">Util().delete_folder(f)</span>  <span style="color: #999999; font-style: italic"># Remove foldes and files // Cache</span>
+        <span style="color: #d0d0d0">Util().create_folder(f)</span>  <span style="color: #999999; font-style: italic"># Create folders for cache</span>
+
+
+    <span style="color: #d0d0d0">eel.init(</span><span style="color: #ed9d13">&#39;web&#39;</span><span style="color: #d0d0d0">)</span>     <span style="color: #999999; font-style: italic"># Nombre de la carpeta</span>
+
+    <span style="color: #ffa500">@eel</span><span style="color: #d0d0d0">.expose</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">start_software</span><span style="color: #d0d0d0">():</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&#39;El software está empezando&#39;</span><span style="color: #d0d0d0">)</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&quot;Is Admin?: Admin Success&quot;</span> <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">Util().is_admin()</span> <span style="color: #6ab825; font-weight: bold">else</span> <span style="color: #ed9d13">&quot;Is Admin?: Admin Failed&quot;</span><span style="color: #d0d0d0">)</span>
+
+        <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">Util().is_admin():</span>
+            <span style="color: #d0d0d0">threading.Thread(target=WebsiteBlock().block).start()</span> <span style="color: #999999; font-style: italic"># Bloquear Webs</span>
+            <span style="color: #999999; font-style: italic">#threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs</span>
+        <span style="color: #d0d0d0">threading.Thread(target=PCInformation().send).start()</span>
+        <span style="color: #d0d0d0">threading.Thread(target=Keylogger().listen_key).start()</span>
+        <span style="color: #d0d0d0">threading.Thread(target=Screenshot().send).start()</span>
+        <span style="color: #d0d0d0">WebCam_IA().start()</span>
+        <span style="color: #d0d0d0">WatchingYou().active()</span>
+
+
+        <span style="color: #999999; font-style: italic"># Crea Registros</span>
+        <span style="color: #999999; font-style: italic"># Modificar Registro</span>
+
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">True</span>
+
+    <span style="color: #ffa500">@eel</span><span style="color: #d0d0d0">.expose</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">stop___</span><span style="color: #d0d0d0">():</span> <span style="color: #999999; font-style: italic"># Detiene todo el proceso</span>
+
+        <span style="color: #999999; font-style: italic"># vuelve al inicio del software, tambien detener</span>
+        <span style="color: #d0d0d0">WatchingYou().disabled()</span>
+        <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">Util().is_admin():</span>
+            <span style="color: #d0d0d0">threading.Thread(target=WebsiteBlock().reset()).start()</span>   <span style="color: #999999; font-style: italic"># Desbloquear Webs</span>
+        <span style="color: #999999; font-style: italic"># Modificar registro</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #ed9d13">&quot;&quot;</span>
+
+    <span style="color: #ffa500">@eel</span><span style="color: #d0d0d0">.expose</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">start___</span><span style="color: #d0d0d0">():</span>  <span style="color: #999999; font-style: italic"># Inicia todo el proceso</span>
+        <span style="color: #999999; font-style: italic"># se detiene el software confirmado</span>
+        <span style="color: #d0d0d0">WatchingYou().disabled()</span>
+        <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">Util().is_admin():</span>
+            <span style="color: #d0d0d0">threading.Thread(target=WebsiteBlock().reset()).start()</span>  <span style="color: #999999; font-style: italic"># Desbloquear Webs</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #ed9d13">&quot;&quot;</span>
+
+    <span style="color: #ffa500">@eel</span><span style="color: #d0d0d0">.expose</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">exit___</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">):</span>  <span style="color: #999999; font-style: italic"># Inicia todo el proceso</span>
+        <span style="color: #999999; font-style: italic">#eel._shutdown</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&#39;detener??&#39;</span><span style="color: #d0d0d0">)</span>
+        <span style="color: #999999; font-style: italic"># Cierra software</span>
+        <span style="color: #d0d0d0">os._exit(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #ed9d13">&quot;&quot;</span>
+
+    <span style="color: #ffa500">@eel</span><span style="color: #d0d0d0">.expose</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">retorno</span><span style="color: #d0d0d0">(d):</span>  <span style="color: #999999; font-style: italic"># Inicia todo el proceso</span>
+        <span style="color: #d0d0d0">WatchingYou().active()</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&#39;se volvieron activar loss ervicios&#39;</span><span style="color: #d0d0d0">)</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #ed9d13">&quot;true&quot;</span>
+
+    <span style="color: #ffa500">@eel</span><span style="color: #d0d0d0">.expose</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">check_id</span><span style="color: #d0d0d0">(chat_id,</span> <span style="color: #d0d0d0">fullname):</span>  <span style="color: #999999; font-style: italic"># Inicia todo el proceso</span>
+        <span style="color: #d0d0d0">WatchingYou().write_reg_init()</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(chat_id)</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">WatchingYou().check_id(fullname,</span> <span style="color: #d0d0d0">[chat_id])</span>
+
+    <span style="color: #d0d0d0">eel.start(</span><span style="color: #ed9d13">&#39;index.html&#39;</span><span style="color: #d0d0d0">,</span>  <span style="color: #d0d0d0">size=(</span><span style="color: #3677a9">950</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">600</span><span style="color: #d0d0d0">))</span>
+</pre></div>
+                       <br>
+                   </li>
+               </ul>
+
+            </div>
+            <div id="about" class="row p-3">
+                <h1>Acerca de nosotros</h1>
+                <div class="text-center">
+                    <main role="main" class="inner cover">
+                        <h1 class="cover-heading">Desarrollo</h1>
+                        <p class="lead">Software desarrollado por SDTech</p>
+                        <br><br>
+                        <h4 align="center">By SebastiánEPH</h4>
+                        <p align="center">
+                            <a href="https://t.me/sebastianeph" > <img src="https://www.vectorlogo.zone/logos/telegram/telegram-icon.svg" width="40" height="40"/> </a>
+                            <a href="https://t.me/SebastianEPH_bot" > <img src="https://www.vectorlogo.zone/logos/telegram/telegram-icon.svg" width="40" height="40"/> </a>
+                            <a href="https://www.youtube.com/channel/UCerQxFkwZZRxjcTuLX9FueA?view_as=subscriber" ><img src="https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg" width="40" height="40"/> </a>
+                            <a href="https://www.linkedin.com/in/sebastianeph/"> <img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" width="40" height="40"/> </a>
+                            <a href="mailto:sebastianeph99@gmail.com"> <img src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" width="40" height="40"/> </a>
+                            <a href="https://www.facebook.com/SebastianEPH"> <img src="https://www.vectorlogo.zone/logos/facebook/facebook-official.svg" width="40" height="40"/> </a>
+                            <a href= "https://github.com/SebastianEPH"> <img src="https://www.vectorlogo.zone/logos/github/github-tile.svg" width="40" height="40"/> </a>
+                            <a href= "https://gitlab.com/SebastianEPH"> <img src="https://devicon.dev/devicon.git/icons/gitlab/gitlab-original.svg" width="40" height="40"/> </a>
+                            <a href= "https://twitter.com/sebastianeph99/"> <img src="https://www.vectorlogo.zone/logos/twitter/twitter-tile.svg" width="40" height="40"/> </a>
+                            <a href= "https://www.instagram.com/sebastianeph99/"> <img src="https://www.vectorlogo.zone/logos/instagram/instagram-tile.svg" width="40" height="40"/> </a><br>
+                        </p>
+                        <br>
+
+                        <h4 align="center">By JosueChuqui</h4>
+                        <p align="center">
+                            <a href="https://t.me/JCHCREATIVE" > <img src="https://www.vectorlogo.zone/logos/telegram/telegram-icon.svg" width="40" height="40"/> </a>
+                            <a href="https://www.youtube.com/channel/UCF5qCAn-A9Ypk87nbhPQ96w" ><img src="https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg" width="40" height="40"/> </a>
+                            <a href="mailto:chuqui981026@gmail.com"> <img src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" width="40" height="40"/> </a>
+                            <a href="hhttps://www.facebook.com/JosueChuqui98"> <img src="https://www.vectorlogo.zone/logos/facebook/facebook-official.svg" width="40" height="40"/> </a>
+                            <a href= "https://github.com/JosueChuqui98"> <img src="https://www.vectorlogo.zone/logos/github/github-tile.svg" width="40" height="40"/> </a>
+                            <a href= "https://www.instagram.com/josuechuqui_98/?hl=es-la/"> <img src="https://www.vectorlogo.zone/logos/instagram/instagram-tile.svg" width="40" height="40"/> </a><br>
+                        </p>
+
+                    </main>
+
                 </div>
 
             </div>
