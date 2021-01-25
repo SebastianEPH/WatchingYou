@@ -39,6 +39,4 @@ function about(){
     all()
     $about.style.display = 'block'
 }
-
-code_documentation()
-
+main()
