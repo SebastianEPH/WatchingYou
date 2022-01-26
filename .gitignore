@@ -18,6 +18,10 @@ __pycache__
 /.idea/
 \.idea
 /.idea
+docs
+builds
+web
+venv
 [Compile DEBUG] EXE\
 \[Compile DEBUG] EXE\
 [Compile DEBUG] EXE\*

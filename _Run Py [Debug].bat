@@ -1,6 +1,6 @@
 echo off
 title Run mode DEBUG
 color 0a
-python main.py
+python WatchingYou.py
 :cmd
 pause null 
