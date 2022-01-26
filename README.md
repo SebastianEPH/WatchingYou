@@ -1,9 +1,9 @@
 # SOFTWARE DE MONITOREO PARA EXAMENES DE ADMISION
 
 Nota: 
-`La idea del creacion del software nació por el problema de plagios en los exámenes de admisión virtuales , que tuvieron las universidades en Perú ocacionada, por una mala vigilancia, y un software antiplagio precario.`
- 
-`El software tambien puede usarse para éxamenes comunes, pero va enfocada a los examenes de admision, cada caracteristica se puede desactivar individualmente.`
+`La idea del creación del software nació por el problema de plagios en los exámenes de admisión virtuales , que tuvieron las universidades en Perú ocasionada, por una mala vigilancia, y un software anti plagio precario.`
+`El software también puede usarse para exámenes comunes, pero va enfocada a los exámenes de admisión, cada característica se puede desactivar individualmente.`
+
 
 
 ---
@@ -15,7 +15,7 @@ Nota:
 
 ## REGISTRO DE TECLAS
               
-Esto con el fin de que el Vigilante pueda observar si el postulante estuvo charlando con alguien o buscando algo por internet
+Esto con el fin de que el vigilante pueda observar si el postulante estuvo charlando con alguien o buscando algo por internet
 
 
 ---
@@ -26,16 +26,17 @@ Esto con el fin de que el Vigilante pueda observar si el postulante estuvo charl
 
 ## WEB CAM
 
-Esta caracteristica toma captura, graba y reconoce los ojos y cara con el fin de tener un registro de como se comportó el postulante en pleno examen de admisión
+Esta característica toma captura, graba y reconoce los ojos y cara con el fin de tener un registro de cómo se comportó el postulante en pleno examen de admisión
 
 ---
 
 <img class="" src="https://caligrama.net/wp-content/uploads/2011/01/servicios.png" alt="Generic placeholderimage" width="140" height="140">
               
 ## SERVICIOS DE WINDOWS 
-Obtiene a tiempo real los servicios que se están ejecutando en ese momento, con la finalidad de detectar si tienen algun servicio sospechoso activo en pleno examen 
+Obtiene a tiempo real los servicios que se están ejecutando en ese momento, con la finalidad de detectar si tienen algún servicio sospechoso activo en pleno examen 
 
-<code>si se tiene sospechas de que el estudiante está haciendo trampa se puede ver esa info de manera de prueba</code>
+<code>si se tiene sospechas de que el estudiante está haciendo trampa se puede ver esa informacion de manera de prueba</code>
+
 
 --- 
 
@@ -43,7 +44,8 @@ Obtiene a tiempo real los servicios que se están ejecutando en ese momento, con
               
 ## REGISTRO DE SOFTWARE
 
-Detecta a tiempo real y envia la lista completa de todos los softwares que se estan ejecutando actualmente en el sistema del postulante
+Detecta a tiempo real y envía la lista completa de todos los softwares que se están ejecutando actualmente en el sistema del postulante
+
 
 ---
 
@@ -51,7 +53,9 @@ Detecta a tiempo real y envia la lista completa de todos los softwares que se es
               
 ## GRABA AUDIO
 
-El software grabará el audio, solo cuando el examen de admision comience y se pausará cuando el examen termine
+
+El software grabará el audio, solo cuando el examen de admisión comience y se pausará cuando el examen termine
+
 
 ---
 
@@ -60,7 +64,7 @@ El software grabará el audio, solo cuando el examen de admision comience y se p
 
 ## CAPTURA DE PANTALLA 
 
-Se tomará capturas de pantalla cada x segundos `[el docente configura el plazo de tiempo, segun sea conveniente en el momento]` , son capturadas y enviadas a tiempo real.
+Se tomará capturas de pantalla cada x segundos `[el docente configura el plazo de tiempo, según sea conveniente en el momento]` , son capturadas y enviadas a tiempo real.
 
 ---
 
@@ -69,9 +73,10 @@ Se tomará capturas de pantalla cada x segundos `[el docente configura el plazo 
 
 ## BLOQUEO DE PAGINAS WEBs
 
-Se bloquearán distintas paginas webs, como wikipedia, google, facebook incluso el server de whastapp, para evitar que el postulante pueda contartarse con el, cabe recalcar que solo se bloqueará temporalmente cuando comience el examen y  cuando el examen finalice
+Se bloquearán distintas páginas webs, como wikipedia, google, facebook incluso el server de WhatsApp, para evitar que el postulante pueda contactarse con alguien, cabe recalcar que solo se bloqueará temporalmente cuando comience el examen y  cuando el examen finalice
 
 `El bloqueo solo ocurre en la PC o laptop, no bloquea el modem`
+
 
 ---
 
@@ -79,14 +84,14 @@ Se bloquearán distintas paginas webs, como wikipedia, google, facebook incluso 
 
 ## HISTORIAL DE NAVEGACION
 
-Se obtiene el hisotial de navegacion, solo del tiempo que empiece el examen hasta que termine.
+Se obtiene el historial de navegación, solo del tiempo que empiece el examen hasta que termine.
 
 ---
 ## TELEGRAM BOT
 
 <img class="" src="https://web.telegram.org/img/logo_share.png" alt="Generic placeholder image" width="140" height="140">
 
-Todos los metadatos se envian mediante un bot telegram, esto con la finalidad de no tener costes por banda ancha y servidores, todo es puede ser almacenado en un grupo de telegram o un usuario independiente, la cual administraría el encargado del exmane de admision 
+Todos los metadatos se envían mediante un bot telegram, esto con la finalidad de no tener costes por banda ancha y servidores, todo es puede ser almacenado en un grupo de telegram o un usuario independiente, la cual administraría el encargado del examen de admisión 
               
 
 # CAPTURAS DE PANTALLA DEL SOFTWARE EN EJECUCION 
@@ -136,8 +141,8 @@ Todos los metadatos se envian mediante un bot telegram, esto con la finalidad de
     <li><b>Licencia: </b> <code>GNU</code></li>
     <li><b>IDE: </b> <code>PyCharm</code></li>
     <li><b>Fecha de Documentación: </b> <code>24/01/2021</code></li>
-    <li><b>Descripción: </b> <code>La idea del creacion del software nació por el problema de plagios en los exámenes de admisión virtuales , que tuvieron las universidades en Perú ocacionada, por una mala vigilancia, y un software antiplagio precario.
-    El software tambien puede usarse para éxamenes comunes, pero va enfocada a los examenes de admision, cada caracteristica se puede desactivar individualmente.</code></li>
+    <li><b>Descripción: </b> <code>La idea del creación del software nació por el problema de plagios en los exámenes de admisión virtuales , que tuvieron las universidades en Perú ocasionada, por una mala vigilancia, y un software anti plagio precario.
+    El software también puede usarse para exámenes comunes, pero va enfocada a los exámenes de admisión, cada característica se puede desactivar individualmente.</code></li>
 </ul>
 
 <h2>Caracteristicas</h2>     
